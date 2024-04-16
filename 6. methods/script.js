@@ -646,45 +646,155 @@ var userIndex = users.findIndex(function (user) {
 
 console.log("Index: ", userIndex);
 
+//hal tamrin foreach
+
+var usersArray = [
+  { id: 1, name: "amin", family: "SaeediRad", age: 21 },
+  { id: 2, name: "amir", family: "Mohammadi", age: 19 },
+  { id: 3, name: "Hasan", family: "Ghorbani", age: 18 },
+];
+
+usersArray.forEach(function (user) {
+  console.log("Name: " + user.name + " Family: " + user.family);
+});
+
+//hal tamrin froshgah online
+var allProducts = [
+  { id: 1, name: "Laptop", price: 17000000 },
+  { id: 2, name: "Phone", price: 7000000 },
+  { id: 3, name: "Pen", price: 12000 },
+  { id: 4, name: "Pencil", price: 9000 },
+  { id: 5, name: "Eraser", price: 6000 },
+  { id: 6, name: "Milk", price: 35000 },
+];
+
+var userBasket = [
+  { id: 1, name: "pen", price: 12000 },
+  { id: 2, name: "pencil", price: 9000 },
+];
+
+var userProduct = prompt("Enter The Name Of Product: "); // 'Phone'
+
+var requestProduct;
+
+var isInShop = allProducts.some(function (product) {
+  if (product.name === userProduct) {
+    requestProduct = product;
+    return true;
+  }
+});
+
+if (isInShop === true) {
+  var newProduct = {
+    id: 3,
+    name: requestProduct.name,
+    price: requestProduct.price,
+  };
+  userBasket.push(newProduct);
+
+  var sum = 0;
+
+  userBasket.forEach(function (product) {
+    sum = sum + product.price;
+  });
+  console.log(userBasket);
+  alert("Total Price: " + sum);
+} else {
+  console.log("موجودی نیست");
+}
+
 //arrays methods
 let scores = [15, 14, 5, 12, 4, 20];
+
+let scores2 = [12, 23];
+
 let students = [
   { name: "ali", last: "ahmadi", age: 22 },
   { name: "reza", last: "alavi", age: 25 },
   { name: "sara", last: "mohseni", age: 20 },
 ];
 
-scores[6] = 16; //adds the next array value now scores=[15,14,5,12,4,20,16];
+scores[2] = 16; //adds the next array value now scores=[15,14,5,12,4,20,16];
+
 scores.push(13, 17, 1); //push values into array scores=[15,14,5,12,4,20,16,13,17,1];
+
 scores.pop(); //pop out the last value from array scores=[15,14,5,12,4,20,16,13,17];
+
 scores.shift(); //delets first element of array scores=[14,5,12,4,20,16,13,17];
+
 scores.unshift(8, 7); //add to first of array scores=[8,7,14,5,12,4,20,16,13,17];
+
+scores.toString(); // make the array into a string
+
+scores.join("/"); //conect all elements together with / between
+
+scores.concat(scores, scores2);
+
 scores.splice(2, 3); //delets arrays element starting from 2 to 3 times after (2,3,other inputs to replace what we deleted)scores=[8,7,20,16,13,17];
+
+scores.slice(2, 5); //returns all element from index 2 to index 5
+
 scores.includes(4); //true if it finds & false if it doesnt find - we can use a second input as sart index
+
+Array.isArray(scores); //checks if the given input is array or not returns true false
+
+scores.indexOf(5); //return the index of given number in array or returns -1 if it doesnt find
+
+scores.lastIndexOf(5); //return the index of given number in array (the last one) or returns -1 if it doesnt find
+
+scores.reverse(); //reverse array elements
+
+theName = "alireza";
+
+theName.split(""); //convert a string to array. input can be a character to seperat with in string
+
+//foreach
 students.forEach(function (number) {
   console.log(number.age);
 }); //function will execute 0 to 2 times  (array length) and every time one array value goes into function input as number variable + for objects & arrays
+
+//some
 let isInUsers = students.some(function (user) {
   //enonymous function
   console.log(user);
   return user.name == "reza";
 }); //like forEach but it returns true or false and function codes will execute for every array elements untill it reaches a true then stops
+
+//every
 let isAll = ages.every(function (age) {
   console.log(age);
   return age > 18;
 }); //like some but it will stop executing when it reaches a false and return true or false
+
+//findindex
 let studentIndex = students.findIndex(function (st) {
   return st.age == 25; // 1 returns index of array element which the condition is true. executed loop untill find the element
 });
+
+//find
 let studentInfo = students.find(function (st) {
   return st.age == 25; // 1 returns all info of array element which the condition is true. executed loop untill gets true
 });
+
+//map
 let scoresPower = scores.map(function (score) {
   return score ** 2; //do this to every element of array and return it to another array (in scoresPower)
 });
+
+//filter
 let under15 = scores.filter(function (score) {
   return score < 15; //returns elements that are only less than 15 and store it in under 15 array
 });
+
+var userNames = ["Ali", "Amin", "Amir", "roz", "Babak"];
+
+var filteredUserNames = userNames.filter(function (username) {
+  return username.length > 3;
+});
+
+console.log("filteredUserNames: ", filteredUserNames);
+
+//reduce
 let numbers = scores.reduce(function (prevValue, currentValue) {
   //at first array index 0 is prevValue and index 1 is curent value
   console.log(prevValue, currentValue); //outpute in the end: 15 14 | 14 5 | 5 12 | 12 4 | 4 20
@@ -692,14 +802,7 @@ let numbers = scores.reduce(function (prevValue, currentValue) {
   //this goes till the end of array
 }); // can have a third input that determines default value of prevValue
 
-Array.isArray(scores); //checks if the given input is array or not returns true false
-scores.indexOf(5); //return the index of given number in array or returns -1 if it doesnt find
-scores.lastIndexOf(5); //return the index of given number in array (the last one) or returns -1 if it doesnt find
-scores.slice(2, 5); //returns all element from index 2 to index 5
-scores.join("/"); //conect all elements together with / between
-scores.reverse(); //reverse array elements
-theName = "alireza";
-theName.split(""); //convert a string to array. input can be a character to seperat with in string
+//////////////////////////////////////////////////////////////////---------------------------------------------------
 
 //function methods
 var i = 10;
