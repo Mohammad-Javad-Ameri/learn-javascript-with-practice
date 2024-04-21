@@ -646,19 +646,7 @@ var userIndex = users.findIndex(function (user) {
 
 console.log("Index: ", userIndex);
 
-//hal tamrin foreach
-
-var usersArray = [
-  { id: 1, name: "amin", family: "SaeediRad", age: 21 },
-  { id: 2, name: "amir", family: "Mohammadi", age: 19 },
-  { id: 3, name: "Hasan", family: "Ghorbani", age: 18 },
-];
-
-usersArray.forEach(function (user) {
-  console.log("Name: " + user.name + " Family: " + user.family);
-});
-
-//hal tamrin froshgah online
+//hal tamrin froshgah online tamrin2
 var allProducts = [
   { id: 1, name: "Laptop", price: 17000000 },
   { id: 2, name: "Phone", price: 7000000 },
@@ -801,6 +789,373 @@ let numbers = scores.reduce(function (prevValue, currentValue) {
   return currentValue; //now index 1 is going to prevValue and currentValue becomes index 2
   //this goes till the end of array
 }); // can have a third input that determines default value of prevValue
+
+//haltamrin foroshgah online tamrin2
+
+var allProducts = [
+  { id: 1, name: "Laptop", price: 17000000 },
+  { id: 2, name: "Phone", price: 7000000 },
+  { id: 3, name: "Pen", price: 12000 },
+  { id: 4, name: "Pencil", price: 9000 },
+  { id: 5, name: "Eraser", price: 6000 },
+  { id: 6, name: "Milk", price: 35000 },
+];
+
+var userBasket = [
+  { id: 1, name: "pen", price: 12000 },
+  { id: 2, name: "pencil", price: 9000 },
+];
+
+var userProduct = prompt("Enter The Name Of Product: "); // 'Phone'
+
+var requestProduct;
+
+var isInShop = allProducts.some(function (product) {
+  if (product.name === userProduct) {
+    requestProduct = product;
+    return true;
+  }
+});
+
+if (isInShop === true) {
+  var newProduct = {
+    id: 3,
+    name: requestProduct.name,
+    price: requestProduct.price,
+  };
+  userBasket.push(newProduct);
+
+  var sum = 0;
+
+  userBasket.forEach(function (product) {
+    sum = sum + product.price;
+  });
+  console.log(userBasket);
+  alert("Total Price: " + sum);
+} else {
+  console.log("موجودی نیست");
+}
+
+//hal tamrin foroshgah pishrafte tamrin4
+
+var allProducts = [
+  { id: 1, name: "laptop", price: 17000000 },
+  { id: 2, name: "phone", price: 7000000 },
+  { id: 3, name: "milk", price: 35000 },
+  { id: 4, name: "pen", price: 12000 },
+  { id: 5, name: "pencil", price: 9000 },
+  { id: 6, name: "cable", price: 55000 },
+  { id: 7, name: "water", price: 6000 },
+  { id: 8, name: "soft drink", price: 13000 },
+];
+
+var userBasket = [
+  { id: 1, name: "milk", price: 35000 },
+  { id: 2, name: "water", price: 6000 },
+];
+
+var userRequest = prompt("1. Add Product \n 2. Remove product");
+
+if (userRequest === "1") {
+  //   alert("Add");
+  var userProductName = prompt("Enter Your Name: ");
+
+  var productData;
+
+  var isInShop = allProducts.some(function (product) {
+    if (product.name === userProductName) {
+      productData = product;
+      return true;
+    }
+  });
+  if (isInShop === true) {
+    var newProduct = {
+      id: 3,
+      name: productData.name,
+      price: productData.price,
+    };
+    userBasket.push(newProduct);
+    console.log("Basket: ", userBasket);
+  } else {
+    alert("همچین محصولی موجود نمی باشد");
+  }
+} else if (userRequest === "2") {
+  //   alert("Remove");
+
+  var userProductName = prompt("Enter Your Product Name: ");
+
+  var productIndex = userBasket.findIndex(function (product) {
+    return product.name === userProductName;
+  });
+
+  userBasket.splice(productIndex, 1);
+
+  console.log("Basket: ", userBasket);
+} else {
+  alert("لطفا گزینه صحیح را انتخاب نمایید");
+}
+
+//haltamrin hazine post tamrin6
+var userBasket = [
+  { id: 1, name: "laptop", price: 5000000 },
+  { id: 2, name: "phone", price: 3000000 },
+  { id: 3, name: "milk", price: 35000 },
+  { id: 4, name: "water", price: 6000 },
+  { id: 5, name: "coolpad", price: 400000 },
+  { id: 6, name: "pencil", price: 9000 },
+];
+
+var filteredProducts = userBasket.filter(function (product) {
+  return product.price < 100000;
+});
+
+var postCost = filteredProducts.length * 1000;
+
+var sum = 0;
+
+userBasket.forEach(function (product) {
+  sum = sum + product.price;
+});
+
+var totalPrice = sum + postCost;
+
+console.log("Total Price: ", totalPrice);
+
+//haltamrin todo list tamrin8
+var todosArray = [
+  { id: 1, title: "learn js", isDoing: false },
+  { id: 2, title: "make footer", isDoing: true },
+  { id: 3, title: "design", isDoing: false },
+  { id: 4, title: "vue js", isDoing: false },
+];
+
+var userMenu = prompt(
+  "Choose one of them: \n 1. Add Todo \n 2. Remove Todo \n 3. Do Todo"
+);
+
+if (userMenu === "1") {
+  // alert('Add')
+  var newTodoName = prompt("Enter The New Todo Name: ", "");
+  var newTodoObject = {
+    id: todosArray.length + 1,
+    title: newTodoName,
+    isDoing: false,
+  };
+  todosArray.push(newTodoObject);
+  console.log("Todos Array: ", todosArray);
+} else if (userMenu === "2") {
+  // alert('Remove')
+  var removeTodoName = prompt("Enter The Removable Todo Name: ", "");
+  var removableTodoIndex = todosArray.findIndex(function (todo) {
+    return todo.title === removeTodoName;
+  });
+  todosArray.splice(removableTodoIndex, 1);
+  console.log("Todos Array: ", todosArray);
+} else if (userMenu === "3") {
+  // alert('Doing')
+  var editableTodoName = prompt("Enter The Editable Todo Name: ", "");
+  todosArray.forEach(function (todo) {
+    // Codes
+    // console.log(todo)
+    if (todo.title === editableTodoName) {
+      todo.isDoing = true;
+    }
+  });
+  console.log("Todos Array: ", todosArray);
+} else {
+  alert("گزینه وارد شده معتبر نمی باشد");
+}
+
+//hal tamtrin ezafe kardan task be shakhs tamrin 9
+var tasksArray = {
+  ali: ["html", "css", "js"],
+  amin: ["react", "vue", "angular"],
+  mohammad: ["seo", "link building"],
+  amir: ["admin", "content"],
+};
+
+var newTaskname = prompt("Enter The New Task: ");
+var employName = prompt("Enter The Employ Name: "); // nohammad
+
+var employTasks = tasksArray[employName];
+employTasks.push(newTaskname);
+
+console.log(tasksArray);
+
+//hal tamrin forget password tamrin 10
+var usersData = [
+  { id: 1, username: "amin", password: "01010101", email: "amin@gmail.com" },
+  { id: 2, username: "ali", password: "ali9021", email: "ali@gmail.com" },
+  { id: 3, username: "amir", password: "amir56", email: "amir@gmail.com" },
+  { id: 4, username: "babak", password: "babak2000", email: "babak@gmail.com" },
+  { id: 5, username: "hasan", password: "hasan_r", email: "hasan@gmail.com" },
+  { id: 6, username: "reza", password: "reza.xyz", email: "reza@gmail.com" },
+];
+
+var usernamee = prompt("Enter Your UserName: ");
+
+var mainUserData = usersData.find(function (user) {
+  return user.username === username;
+});
+
+if (mainUserData === undefined) {
+  alert("شما در سایت ثبت نام نکردید");
+} else {
+  alert("Your Password: " + mainUserData.password);
+}
+
+//best practice 2
+// use foreach instead of for while do while
+// write comment
+
+// var users = ['ali', 'amin', 'amir', 'babak']
+
+function sumNumbers(num1, num2 = 0) {
+  return num1 + num2;
+}
+//meghdar default baray function ha
+// name gozari dorost
+// estefade az camel case
+// har function yek kar anjam mide
+// estefade ===
+var userLastName;
+
+console.log(sumNumbers(8));
+
+//setInterval
+
+setInterval(function () {
+  console.log(hello);
+}, 1000);
+var i = 10;
+
+var timer = setInterval(function () {
+  // Coeds
+
+  if (i === 0) {
+    // clean interval
+    alert("Game Over");
+    clearInterval(timer);
+  }
+
+  console.log(i);
+  i--;
+}, 1000);
+
+// 1000ms = 1s
+
+//setTimeOut
+
+setTimeout(function () {
+  console.log(hello);
+}, 1000);
+
+setTimeout(
+  function (num1, num2) {
+    alert(num1 + num2);
+  },
+  2000,
+  8,
+  12
+);
+
+//flag
+
+// Flag => پرچم
+
+var userName = prompt("Enter The Username: ");
+
+var users = ["ali", "amin", "amir", "babak"];
+
+var loginFlag = false;
+
+users.forEach(function () {
+  if (users === userName) {
+    loginFlag = true;
+  }
+});
+
+console.log("Flag: ", loginFlag);
+
+if (loginFlag) {
+  alert("لاگین شدین");
+} else {
+  alert("شما ثبت نام نکردید");
+}
+
+//hoisting
+// Hoisting - Hoist - بالا بردن
+
+// num1 = 10
+// num2 = 12
+
+// console.log(num1)
+
+// var num1, num2
+// var num2
+
+// function showValue () {
+//     console.log(12 + 12)
+// }
+
+var showValue = function () {
+  console.log(12 + 12);
+};
+
+showValue();
+
+//let and const
+// var let const = ثابت
+
+var num1 = 10;
+
+num1 = 20;
+
+var num1 = 20;
+console.log(num1);
+
+let num1 = 12;
+
+num1 = 27;
+
+let num1 = 35;
+
+console.log(num1);
+
+/////////////////////////////////////////hoisting
+
+num1 = 10;
+
+console.log(num1);
+
+var num1;
+
+//////////////////////////////////////// Scope ناحیه
+
+let num1 = 20; // global scope
+
+{
+  let num1 = 30; // block scope
+  console.log(num1);
+}
+
+console.log(num1);
+
+/////////////////////////////////////////////const
+
+const num1 = 120;
+
+num1 = 10;
+
+console.log(num1);
+
+//////////////////////////////////
+
+//dom
+
+let h1Elem = document.getElementById("title");
+
+console.log(h1Elem);
 
 //////////////////////////////////////////////////////////////////---------------------------------------------------
 
