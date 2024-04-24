@@ -1,20 +1,79 @@
+//hal tamrin soal
+var allQuestions = [
+  { id: 1, title: "2 + 2", answer: "4" },
+  { id: 2, title: "2 * 4", answer: "8" },
+  { id: 3, title: "7 ** 2", answer: "49" },
+  { id: 4, title: "12 / 4", answer: "3" },
+  { id: 5, title: "100 / 25", answer: "4" },
+  { id: 6, title: "100 * 2", answer: "200" },
+  { id: 7, title: "Cpaital Of Iran?", answer: "tehran" },
+];
+
+var score = 0;
+
+var mainAnswer = "";
+
+allQuestions.forEach(function (question) {
+  mainAnswer = prompt(question.title + " ?");
+
+  if (mainAnswer === question.answer) {
+    score++;
+  }
+});
+
+alert("Your Final Score: " + score);
+
+//hal tamrin time
+var minute = +prompt("Enter The Minute: "); // 1
+var second = +prompt("Enter The Second: "); // 12
+
+var timer = setInterval(function () {
+  // codes
+
+  if (second === -1) {
+    minute--;
+    second = 59;
+  }
+
+  if (minute === 0 && second === 0) {
+    clearInterval(timer);
+  }
+
+  console.log("Timer: " + minute + " : " + second);
+  second--;
+}, 1000);
+
 // Document Object Model
 // with DOM we can minipulate web page document elements
 
 // get elements
 let h1Elem = document.getElementById("title");
+console.log(h1Elem);
+
 let liElems = document.getElementsByClassName("list-item");
+console.log(liElems);
+
 let listItems = document.getElementsByTagName("li");
+console.log(listItems);
+
 let firstListItem = document.querySelector("#box");
+console.log(firstListItem);
+
 let ulItems = document.querySelectorAll(".list-item");
+console.log(ulItems);
+
 let inputElement = document.getElementById("input");
+console.log(inputElement);
 
 //get & set attribute
-h1Elem.getAttribute("class"); //can get any attribute even those who are not reall html attribute unlike elem.attr // can not get a setted propert for html element directly in js
-h1Elem.setAttribute("id", "about");
-h1Elem.onclick = function () {
-    //do sth //this is another way to set an attribute and call a funciton
-};
+let h1Elem = document.getElementById("title");
+console.log(h1Elem.getAttribute("align"));
+console.log(h1Elem.getAttribute("id"));
+
+h1Elem.setAttribute("class", "js-text");
+let liElems = document.getElementsByClassName("list-item");
+console.log(liElems[0].setAttribute("id", "about"));
+
 //get attribute with .
 h1Elem.id; //gets only reall html attribue/object property //can get a setted propert for html element directly in js like the code bellow //but for class we should use .className
 h1Elem.NewProperty = "new attribute";
@@ -23,10 +82,20 @@ h1Elem.removeAttribute("placeholder"); //removes a specific attribute
 h1Elem.hasAttribute("href"); //checks if an element has a specific attribute or not / true or false
 
 //get & set css style
-h1Elem.style.color = "blue"; //any css property
-h1Elem.style.fontWeight = "bold";
-let allnonInlineStyles = getComputedStyle(boxElem); //for external or internal (not inline!) styles
-allnonInlineStyles.backgroundColor;
+let h1Elem = document.getElementById("title");
+
+h1Elem.style.color = "red";
+h1Elem.style.fontSize = "60px";
+
+let liItems = document.getElementsByClassName("list-item");
+
+liItems[3].style.color = "blue";
+liItems[3].style.fontWeight = "bold";
+
+console.log(liItems);
+
+// let allnonInlineStyles = getComputedStyle(boxElem); //for external or internal (not inline!) styles
+// allnonInlineStyles.backgroundColor;
 h1Elem.style.cssText = "color: red; background-color:blue;"; //write exacly the css properties
 document.documentElement.style.setProperty("--varName", "value"); //for setting or changing css variables
 document.documentElement.style.getPropertyValue("--varName"); //returns the variable value
@@ -38,14 +107,48 @@ liElems[2].textContent;
 liElems[2].innerHTML = "home"; //for all elements
 inputElement.value = "react"; //for forms and input
 
+let h1Elem = document.getElementById("title");
+
+let liItems = document.querySelectorAll(".list-item");
+
+let input = document.getElementById("input");
+
+let selectBox = document.getElementById("select");
+
+// console.log(liItems[2].innerHTML)
+// console.log(liItems[2].innerText)
+// console.log(liItems[0].textContent)
+liItems[0].innerHTML = "درباره ما";
+
+selectBox.value = "tehran";
+
+input.value = "vue js";
+
+console.log(selectBox.value);
+
 //create element and send it to html
+
+let userName = prompt("Enter The Name: ");
+
+let newDivElem = document.createElement("div");
+
+newDivElem.innerHTML = userName;
+
+newDivElem.setAttribute("id", "username");
+
+newDivElem.setAttribute("class", "title");
+
+newDivElem.style.color = "green";
+
+console.log(newDivElem);
+
 let ulElem = document.querySelector("ul");
 let newLiItem = document.createElement("li");
 newLiItem.innerHtml = "products";
 newLiItem.setAttribute("class", "list-item");
 ulElem.append(newLiItem); //this //can be any string or node //can have multiple inputes //can not return anything in a variable
 ulElem.appendChild(newLiItem); //or this //just add Node (html element) // just one input //can return nodes to a variable
-ulElem.insertAdjacentHTML(position, "html code"); //positons: beforbegin - afterbegin - beforend - afterend
+// ulElem.insertAdjacentHTML(position, "html code"); //positons: beforbegin - afterbegin - beforend - afterend
 
 //remove elements from DOM
 ulElem.remove(); //just remove a single element not array
@@ -57,9 +160,9 @@ h1Elem.classList.toggle("classname"); //adds class if it doesnt exist removes cl
 
 //event minipulation
 h1Elem.addEventListener("submit", function (event) {
-    console.log(event); //it logs all element event properties which can be used to minipulate the element and user interaction
-    event.target; // an example of a proprty that returns the element
-    //other properties can be seen in console.log(event)
+  console.log(event); //it logs all element event properties which can be used to minipulate the element and user interaction
+  event.target; // an example of a proprty that returns the element
+  //other properties can be seen in console.log(event)
 });
 
 //Nodes
