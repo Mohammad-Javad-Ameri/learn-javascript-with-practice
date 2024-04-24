@@ -1,7 +1,18 @@
 //add onclick="funcName()"  attribute to html element
 //oneclick is an event and the function will execute if user click on this element
 function funcName() {
-    alert("you clicked the button");
+  alert("you clicked the button");
+}
+
+let h1Elem = document.getElementById("title");
+
+function clickFunc() {
+  // alert('Click Shod :)')
+  h1Elem.style.color = "red";
+}
+
+function keyLog() {
+  console.log("Type Shod");
 }
 
 //better way to use events directly in javascript
@@ -18,11 +29,11 @@ theElem.addEventListener('click',function(){
 //event happens only once
 let btn = document.querySelector("button");
 btn.addEventListener(
-    "click",
-    function () {
-        console.log("hello");
-    },
-    { once: true }
+  "click",
+  function () {
+    console.log("hello");
+  },
+  { once: true }
 );
 /*
 
