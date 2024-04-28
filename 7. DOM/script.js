@@ -150,6 +150,28 @@ ulElem.append(newLiItem); //this //can be any string or node //can have multiple
 ulElem.appendChild(newLiItem); //or this //just add Node (html element) // just one input //can return nodes to a variable
 // ulElem.insertAdjacentHTML(position, "html code"); //positons: beforbegin - afterbegin - beforend - afterend
 
+let ulElem = document.querySelector("ul");
+
+function addNewLi() {
+  // console.log('Click')
+  let newLiTag = document.createElement("li");
+  newLiTag.innerHTML = "Products";
+
+  let secondLiElem = document.createElement("li");
+  secondLiElem.innerHTML = "Users";
+
+  // ulElem.append('Products')
+  // ulElem.appendChild('Products')
+
+  // ulElem.append(newLiTag, secondLiElem)
+  // ulElem.appendChild(newLiTag, secondLiElem)
+
+  // let appendResult = ulElem.append(newLiTag)
+  // let appendResult = ulElem.appendChild(newLiTag)
+
+  console.log(appendResult);
+}
+
 //remove elements from DOM
 ulElem.remove(); //just remove a single element not array
 

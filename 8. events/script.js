@@ -15,17 +15,68 @@ function keyLog() {
   console.log("Type Shod");
 }
 
-//better way to use events directly in javascript
-let theElem = document.querySelector(".btn");
-theElem.addEventListener("click", funcName);
-//here onclick becomes click
-/* or with function expression
+let h1Elem = document.querySelector(".title");
 
-theElem.addEventListener('click',function(){
-        alert("you clicked the button");
+h1Elem.addEventListener("click", function () {
+  console.log("Clicked");
 });
 
-*/
+h1Elem.addEventListener("click", clickEvent);
+
+function clickEvent() {
+  console.log("Clicked On H1 Elem");
+}
+
+theElem.addEventListener("click", function () {
+  alert("you clicked the button");
+});
+
+function usernameFocus() {
+  console.log("Focus username");
+}
+
+function usernameBlur() {
+  console.log("Blur username");
+}
+
+function passwordFocus() {
+  console.log("Focus password");
+}
+
+function passwordBlur() {
+  console.log("Blur password");
+}
+
+let h1Elem = document.getElementById("title");
+
+h1Elem.addEventListener("click", function () {
+  // h1Elem.setAttribute('class', 'red')
+
+  // h1Elem.classList.add('red')
+  // h1Elem.classList.remove('sm-font')
+
+  // toggle
+
+  h1Elem.classList.toggle("red");
+});
+
+// onChange ('input' - 'select')
+
+let countriesSelectBox = document.getElementById("countries");
+
+function changeHandler() {
+  // console.log('Changed')
+  console.log(countriesSelectBox.value);
+}
+
+let countriesData = {
+  Iran: ["Tabriz", "Tehran", "Shiraz", "Esfahan", "Mashhad"],
+  Turkey: ["Istanbul", "Ezmir", "Ankara", "Antaliya"],
+  US: ["Los Angles", "San Diego", "Chicago"],
+};
+
+let mainCountryCities = countriesData[mainCountryName];
+
 //event happens only once
 let btn = document.querySelector("button");
 btn.addEventListener(
