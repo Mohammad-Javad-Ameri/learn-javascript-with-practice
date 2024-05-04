@@ -15,7 +15,7 @@ function keyLog() {
   console.log("Type Shod");
 }
 
-let h1Elem = document.querySelector(".title");
+let h1Elemmm = document.querySelector(".title");
 
 h1Elem.addEventListener("click", function () {
   console.log("Clicked");
@@ -47,7 +47,7 @@ function passwordBlur() {
   console.log("Blur password");
 }
 
-let h1Elem = document.getElementById("title");
+let h1Elemm = document.getElementById("title");
 
 h1Elem.addEventListener("click", function () {
   // h1Elem.setAttribute('class', 'red')
