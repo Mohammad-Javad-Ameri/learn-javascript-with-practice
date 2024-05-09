@@ -172,5 +172,191 @@ theElem.removeEventListener("click", funcName);
     
 */
 
+// Arrow Function
+
+// function sum (num1, num2) {
+//     let addNumbers = num1 + num2
+//     return addNumbers
+// }
+
+// const sum = (num1, num2) => {
+//     let addNumbers = num1 + num2
+//     return addNumbers
+// }
+
+// const pow = (num1, num2) => {
+//     return num1 ** num2
+// }
+
+const pow = (num1, num2) => num1 ** num2;
+
+const logger = (val) => console.log(val);
+
+const generateUser = (id, name, age = 18) => ({ id: id, name: name, age: age });
+
+// console.log(sum(8, 12)) // 20
+// console.log(pow(3, 2)); // 9
+// logger('Test Text')
+
+console.log(generateUser(1, "Ali", 22));
+
+//Example for Arrow Function
+
+let numbers = [1, 4, 2, 8, 76, 32, 99, 34];
+
+// numbers.forEach(number => console.log(number))
+
+let mapDatas = numbers.map((number) => number * 2);
+
+console.log(mapDatas);
+
+// //////////////////////////////////////
+
+const btns = document.querySelector("button");
+
+btns.addEventListener("click", (event) => {
+  console.log(event);
+});
+
+//OnSubmit
+let loginForm = document.getElementById("form");
+
+loginForm.addEventListener("submit", function () {
+  console.log("سابمیت شد");
+});
+
+let usernameInput = document.getElementById("username");
+
 //prevent an event default behaviour
 event.preventDefault(); // just for element that event.cancelable is true
+
+loginForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  console.log(event);
+});
+
+usernameInput.addEventListener("keydown", function (event) {
+  event.preventDefault();
+  console.log(event);
+});
+
+//Event Object
+let logBtn = document.getElementById("btn");
+let usernameInput = document.getElementById("username");
+
+logBtn.addEventListener("click", function (event) {
+  console.log(event);
+});
+
+usernameInput.addEventListener("keydown", function (event) {
+  console.log(event);
+  // if (event.key === 'Enter') {
+  if (event.keyCode === 13) {
+    console.log("اینتر فشار داده شد");
+  }
+});
+
+//nodes in js
+let h1Elems = document.getElementById("title"); // make a h1
+
+// console.log(h1Elem.nodeName)
+// console.log(h1Elem.nodeType)
+
+// siblings
+
+let head1 = document.getElementById("head1");
+let head2 = document.getElementById("head2");
+let head3 = document.getElementById("head3");
+let head4 = document.getElementById("head4");
+let head5 = document.getElementById("head5");
+let head6 = document.getElementById("head6");
+
+let listItems = document.getElementsByClassName("list-item");
+let list = document.getElementById("list");
+
+// console.log(head3.parentNode);
+// console.log(head1.parentElement);
+
+// console.log(head3.previousElementSibling.previousElementSibling);
+// console.log(head3.nextElementSibling.nextElementSibling.nextElementSibling);
+// console.log(listItems[2].nextSibling.nextSibling);
+// console.log(listItems[2].previousSibling.previousSibling.previousSibling.previousSibling);
+// console.log(listItems[2].previousElementSibling);
+
+// console.log(list.childElementCount);
+// console.log(list.children[2]);
+// console.log(list.childNodes);
+// console.log(list.hasChildNodes()); // Boolean
+// console.log(list.firstChild);
+// console.log(list.lastChild);
+console.log(list.firstElementChild);
+console.log((list.lastElementChild.firstElementChild.style.color = "red"));
+
+// remove elem
+
+// let btn = document.querySelector('button')
+// let h1Elem = document.getElementById('title')
+// let h1TextElem = document.getElementsByClassName('text')
+
+// btn.addEventListener('click', function () {
+//     // console.log('Click');
+//     // h1Elem.remove()
+//     h1TextElem[0].remove()
+// })
+
+//////////////////////////////////////
+
+let listItems = document.querySelectorAll(".list-item");
+
+// console.log(listItems)
+
+listItems.forEach(function (li) {
+  li.addEventListener("click", function (event) {
+    // event.target.remove()
+    event.target.parentElement.remove();
+  });
+});
+
+// tamrin todo list
+
+let $ = document;
+let inputElem = $.querySelector("input");
+let addTodoForm = $.querySelector(".add");
+let todoUlElem = $.querySelector(".todos");
+
+function addNewTodo(newTodoValue) {
+  let newTodoLi = $.createElement("li");
+  newTodoLi.className =
+    "list-group-item d-flex justify-content-between align-items-center";
+
+  let newTodoTitleSpan = $.createElement("span");
+  newTodoTitleSpan.innerHTML = newTodoValue;
+
+  let newTodoTrash = $.createElement("i");
+  newTodoTrash.className = "fa fa-trash-o delete";
+
+  newTodoTrash.addEventListener("click", function (event) {
+    event.target.parentElement.remove();
+  });
+
+  newTodoLi.append(newTodoTitleSpan, newTodoTrash);
+
+  todoUlElem.append(newTodoLi);
+
+  console.log(newTodoLi);
+}
+
+addTodoForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+});
+
+inputElem.addEventListener("keydown", function (event) {
+  let newTodoValue = event.target.value.trim();
+
+  if (event.keyCode === 13) {
+    if (newTodoValue) {
+      inputElem.value = "";
+      addNewTodo(newTodoValue);
+    }
+  }
+});
