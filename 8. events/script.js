@@ -360,3 +360,166 @@ inputElem.addEventListener("keydown", function (event) {
     }
   }
 });
+
+// oncontextMenu
+
+function clickHandler() {
+  console.log("Click");
+}
+
+function contextMenuHandler() {
+  console.log("Right Click");
+}
+
+// clipboard Event
+
+let editorElem = document.getElementById("editor");
+
+editorElem.addEventListener("copy", function copyHandler() {
+  console.log("Copy");
+});
+editorElem.addEventListener("cut", function cutHandler() {
+  console.log("Cut");
+});
+editorElem.addEventListener("paste", function pasteHandler() {
+  console.log("Paste");
+});
+
+function copyHandler(event) {
+  event.preventDefault();
+  console.log("Copy");
+}
+
+function cutHandler(event) {
+  event.preventDefault();
+  console.log("Cut");
+}
+
+function pasteHandler(event) {
+  event.preventDefault();
+  console.log("Paste");
+}
+
+editorElem.addEventListener("copy", copyHandler);
+editorElem.addEventListener("cut", cutHandler);
+editorElem.addEventListener("paste", pasteHandler);
+
+// page x page y
+
+function clickHandler(event) {
+  console.log(event);
+}
+
+function contextHandler(event) {
+  console.log(event);
+}
+
+// on load
+
+function loadHandler() {
+  console.log("Loaded");
+}
+
+window.addEventListener("load", loadHandler);
+
+// Dom Content load
+window.addEventListener("DOMContentLoaded", function () {
+  console.log("Dom Content Loaded");
+});
+
+// remove eventlistener
+function removeHandler() {
+  boxElem.removeEventListener("mousemove", mouseMoveHandler);
+  console.log("Event Removed :)");
+}
+
+btnElem.addEventListener("click", removeHandler);
+boxElem.addEventListener("mousemove", mouseMoveHandler);
+
+// onselect
+function selectHandler(event) {
+  console.log("Selected :)", event);
+}
+
+// note app
+
+let $ = document;
+
+const inputElem = $.querySelector("#input-field");
+const btnSaveElem = $.querySelector("#btn-save");
+const btnDeleteElem = $.querySelector("#btn-delete");
+const colorsBox = $.querySelectorAll(".color-box");
+const notesContainer = $.querySelector("#listed");
+
+colorsBox.forEach(function (colorBox) {
+  colorBox.addEventListener("click", function (event) {
+    let mainColor = event.target.style.backgroundColor;
+    inputElem.style.backgroundColor = mainColor;
+  });
+});
+
+function generateNewNote() {
+  let newNoteDivElem = $.createElement("div");
+  newNoteDivElem.className = "card shadow-sm rounded";
+  let inputBg = inputElem.style.backgroundColor;
+  newNoteDivElem.style.backgroundColor = inputBg;
+  newNoteDivElem.addEventListener("click", removeNote);
+
+  let newNotePElem = $.createElement("p");
+  newNotePElem.className = "card-text p-3";
+  newNotePElem.innerHTML = inputElem.value;
+
+  newNoteDivElem.append(newNotePElem);
+
+  notesContainer.append(newNoteDivElem);
+
+  inputElem.value = "";
+  inputElem.style.backgroundColor = "#fff";
+}
+
+function removeNote(event) {
+  event.target.parentElement.remove();
+}
+
+btnDeleteElem.addEventListener("click", function () {
+  inputElem.value = "";
+  inputElem.style.backgroundColor = "#fff";
+});
+
+inputElem.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    if (inputElem.value) {
+      // 'dsv' '' ' '
+      generateNewNote();
+    }
+  }
+});
+
+btnSaveElem.addEventListener("click", generateNewNote);
+
+// onSelect
+function scrollHandler(event) {
+  console.log(
+    document.documentElement.scrollTop,
+    document.documentElement.scrollLeft
+  );
+}
+
+document.addEventListener("scroll", scrollHandler);
+
+//sticky nav
+
+const mainNav = document.getElementById("mainNav");
+const logoImg = document.querySelector("img");
+
+document.addEventListener("scroll", function () {
+  if (document.documentElement.scrollTop > 0) {
+    logoImg.style.height = "64px";
+    mainNav.classList.add("bg-black");
+    mainNav.classList.add("txt-white");
+  } else {
+    logoImg.style.height = "84px";
+    mainNav.classList.remove("bg-black");
+    mainNav.classList.remove("txt-white");
+  }
+});
