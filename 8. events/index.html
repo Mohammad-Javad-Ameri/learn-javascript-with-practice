@@ -28,9 +28,30 @@ It is my text editor. I am Learning js event</textarea
       onselect="selectHandler(event)"
     />
 
+    <div>
+      <audio src="media/music.mp3"></audio>
+
+      <button onclick="playHandler()">Play Music</button>
+      <button onclick="pauseHandler()">pause Music</button>
+      <button onclick="durationHandler()">Show Music Duration</button>
+      <button onclick="currentTimeHandler()">Show Current Time</button>
+      <button onclick="playBackRateHandler()">2X</button>
+
+      <p id="time"></p>
+    </div>
+
     <h1>Header</h1>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <h1>Footer</h1>
+    <button onclick="scrollByHandler()" id="btn">Go Down 100</button>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <button onclick="scrollTopHandler()">Go Up</button>
+
+    <!-- <script src="js/app.js" async></script> -->
+    <!-- <script src="js/app.js" defer></script> -->
+
+    <!-- <script defer>
+      console.log(document.getElementsByTagName('h1')[0]);
+    </script> -->
 
     <script src="script.js"></script>
   </body>
