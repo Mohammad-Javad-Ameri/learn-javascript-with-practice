@@ -441,89 +441,6 @@ function selectHandler(event) {
   console.log("Selected :)", event);
 }
 
-// note app
-
-let $ = document;
-
-const inputElem = $.querySelector("#input-field");
-const btnSaveElem = $.querySelector("#btn-save");
-const btnDeleteElem = $.querySelector("#btn-delete");
-const colorsBox = $.querySelectorAll(".color-box");
-const notesContainer = $.querySelector("#listed");
-
-colorsBox.forEach(function (colorBox) {
-  colorBox.addEventListener("click", function (event) {
-    let mainColor = event.target.style.backgroundColor;
-    inputElem.style.backgroundColor = mainColor;
-  });
-});
-
-function generateNewNote() {
-  let newNoteDivElem = $.createElement("div");
-  newNoteDivElem.className = "card shadow-sm rounded";
-  let inputBg = inputElem.style.backgroundColor;
-  newNoteDivElem.style.backgroundColor = inputBg;
-  newNoteDivElem.addEventListener("click", removeNote);
-
-  let newNotePElem = $.createElement("p");
-  newNotePElem.className = "card-text p-3";
-  newNotePElem.innerHTML = inputElem.value;
-
-  newNoteDivElem.append(newNotePElem);
-
-  notesContainer.append(newNoteDivElem);
-
-  inputElem.value = "";
-  inputElem.style.backgroundColor = "#fff";
-}
-
-function removeNote(event) {
-  event.target.parentElement.remove();
-}
-
-btnDeleteElem.addEventListener("click", function () {
-  inputElem.value = "";
-  inputElem.style.backgroundColor = "#fff";
-});
-
-inputElem.addEventListener("keydown", function (event) {
-  if (event.keyCode === 13) {
-    if (inputElem.value) {
-      // 'dsv' '' ' '
-      generateNewNote();
-    }
-  }
-});
-
-btnSaveElem.addEventListener("click", generateNewNote);
-
-// onScroll
-function scrollHandler(event) {
-  console.log(
-    document.documentElement.scrollTop,
-    document.documentElement.scrollLeft
-  );
-}
-
-document.addEventListener("scroll", scrollHandler);
-
-//sticky nav
-
-const mainNav = document.getElementById("mainNav");
-const logoImg = document.querySelector("img");
-
-document.addEventListener("scroll", function () {
-  if (document.documentElement.scrollTop > 0) {
-    logoImg.style.height = "64px";
-    mainNav.classList.add("bg-black");
-    mainNav.classList.add("txt-white");
-  } else {
-    logoImg.style.height = "84px";
-    mainNav.classList.remove("bg-black");
-    mainNav.classList.remove("txt-white");
-  }
-});
-
 // onscroll & scrollby
 function scrollTopHandler() {
   window.scrollTo(0, 0);
@@ -632,3 +549,524 @@ function timePlusMusicHandler() {
 
 // async / defer
 console.log(document.getElementsByTagName("h1")[0]);
+
+// note app
+
+let $ = document;
+
+const inputElem = $.querySelector("#input-field");
+const btnSaveElem = $.querySelector("#btn-save");
+const btnDeleteElem = $.querySelector("#btn-delete");
+const colorsBox = $.querySelectorAll(".color-box");
+const notesContainer = $.querySelector("#listed");
+
+colorsBox.forEach(function (colorBox) {
+  colorBox.addEventListener("click", function (event) {
+    let mainColor = event.target.style.backgroundColor;
+    inputElem.style.backgroundColor = mainColor;
+  });
+});
+
+function generateNewNote() {
+  let newNoteDivElem = $.createElement("div");
+  newNoteDivElem.className = "card shadow-sm rounded";
+  let inputBg = inputElem.style.backgroundColor;
+  newNoteDivElem.style.backgroundColor = inputBg;
+  newNoteDivElem.addEventListener("click", removeNote);
+
+  let newNotePElem = $.createElement("p");
+  newNotePElem.className = "card-text p-3";
+  newNotePElem.innerHTML = inputElem.value;
+
+  newNoteDivElem.append(newNotePElem);
+
+  notesContainer.append(newNoteDivElem);
+
+  inputElem.value = "";
+  inputElem.style.backgroundColor = "#fff";
+}
+
+function removeNote(event) {
+  event.target.parentElement.remove();
+}
+
+btnDeleteElem.addEventListener("click", function () {
+  inputElem.value = "";
+  inputElem.style.backgroundColor = "#fff";
+});
+
+inputElem.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    if (inputElem.value) {
+      // 'dsv' '' ' '
+      generateNewNote();
+    }
+  }
+});
+
+btnSaveElem.addEventListener("click", generateNewNote);
+
+//sticky nav
+
+const mainNav = document.getElementById("mainNav");
+const logoImg = document.querySelector("img");
+
+document.addEventListener("scroll", function () {
+  if (document.documentElement.scrollTop > 0) {
+    logoImg.style.height = "64px";
+    mainNav.classList.add("bg-black");
+    mainNav.classList.add("txt-white");
+  } else {
+    logoImg.style.height = "84px";
+    mainNav.classList.remove("bg-black");
+    mainNav.classList.remove("txt-white");
+  }
+});
+
+// music player
+const image = document.querySelector("#cover");
+const title = document.getElementById("title");
+const artist = document.getElementById("artist");
+const music = document.querySelector("audio");
+const currentTimeEl = document.getElementById("current-time");
+const durationEl = document.getElementById("duration");
+const progress = document.getElementById("progress");
+const progressContainer = document.getElementById("progress-container");
+const prevBtn = document.getElementById("prev");
+const playBtn = document.getElementById("play");
+const nextBtn = document.getElementById("next");
+const background = document.getElementById("background");
+
+// Music
+const songs = [
+  {
+    path: "media/html.m4a",
+    displayName: "Html Padcast",
+    artist: "Ozbi",
+    cover:
+      "https://images.genius.com/ee202c6f724ffd4cf61bd01a205eeb47.1000x1000x1.jpg",
+  },
+  {
+    path: "media/kar.m4a",
+    displayName: "Developing",
+    artist: "Flora Cash",
+    cover: "images/peakpx.jpg",
+  },
+  {
+    path: "media/bazar.m4a",
+    displayName: "Earn",
+    artist: "Linkin Park",
+    cover:
+      "https://images.genius.com/c5a58cdaab9f3199214f0e3c26abbd0e.1000x1000x1.jpg",
+  },
+];
+
+// Check if Playing
+let isPlaying = false;
+
+// Play
+function playSong() {
+  isPlaying = true;
+  playBtn.classList.replace("fa-play", "fa-pause");
+  playBtn.setAttribute("title", "Pause");
+  music.play();
+}
+
+// Pause
+function pauseSong() {
+  isPlaying = false;
+  playBtn.classList.replace("fa-pause", "fa-play");
+  playBtn.setAttribute("title", "Play");
+  music.pause();
+}
+
+// Play or Pause Event Listener
+playBtn.addEventListener("click", function () {
+  if (isPlaying) {
+    pauseSong();
+  } else {
+    playSong();
+  }
+});
+
+// Update DOM
+function loadSong(song) {
+  console.log(song);
+  title.textContent = song.displayName;
+  artist.textContent = song.artist;
+  music.src = song.path;
+  changeCover(song.cover);
+}
+
+function changeCover(cover) {
+  image.classList.remove("active");
+  setTimeout(() => {
+    image.src = cover;
+    image.classList.add("active");
+  }, 100);
+  background.src = cover;
+}
+
+// Current Song
+let songIndex = 0;
+
+// Previous Song
+function prevSong() {
+  songIndex--;
+  if (songIndex < 0) {
+    songIndex = songs.length - 1;
+  }
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+// Next Song
+function nextSong() {
+  songIndex++;
+  if (songIndex > songs.length - 1) {
+    songIndex = 0;
+  }
+  loadSong(songs[songIndex]);
+  playSong();
+}
+
+// On Load - Select First Song
+loadSong(songs[songIndex]);
+
+// Update Progress Bar & Time
+function updateProgressBar(e) {
+  if (isPlaying) {
+    const duration = e.srcElement.duration;
+    const currentTime = e.srcElement.currentTime;
+    // Update progress bar width
+    const progressPercent = (currentTime / duration) * 100;
+    progress.style.width = progressPercent + "%";
+    // Calculate display for duration
+    const durationMinutes = Math.floor(duration / 60);
+    let durationSeconds = Math.floor(duration % 60);
+    if (durationSeconds < 10) {
+      durationSeconds = "0" + durationSeconds;
+    }
+    // Delay switching duration Element to avoid NaN
+    if (durationSeconds) {
+      durationEl.textContent = durationMinutes + ":" + durationSeconds;
+    }
+    // Calculate display for currentTime
+    const currentMinutes = Math.floor(currentTime / 60);
+    let currentSeconds = Math.floor(currentTime % 60);
+    if (currentSeconds < 10) {
+      currentSeconds = "0" + currentSeconds;
+    }
+    currentTimeEl.textContent = currentMinutes + ":" + currentSeconds;
+  }
+}
+
+// Set Progress Bar
+function setProgressBar(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = music.duration;
+  music.currentTime = (clickX / width) * duration;
+}
+
+// Event Listeners
+prevBtn.addEventListener("click", prevSong);
+nextBtn.addEventListener("click", nextSong);
+music.addEventListener("ended", nextSong);
+music.addEventListener("timeupdate", updateProgressBar);
+progressContainer.addEventListener("click", setProgressBar);
+
+// drag and drop events
+
+function dragStartHandler(event) {
+  console.log("Drag Start");
+
+  event.dataTransfer.setData("elemId", event.target.id);
+}
+
+function dropHandler(event) {
+  let targetId = event.dataTransfer.getData("elemId");
+  let targetElem = document.getElementById(targetId);
+
+  event.target.append(targetElem);
+
+  console.log("Drop");
+}
+
+function dragOverHandler(event) {
+  event.preventDefault();
+  // console.log('DragOver');
+}
+
+// Dragged -> onDragStart onDrag onDragEnd
+// Dropped -> onDragEnter onDragOver onDragLeave onDrop
+
+////////////////////////////////////////////////////////////////////////////////
+
+// Local Storage
+function insertName() {
+  localStorage.setItem("name", "Amin");
+
+  // Key: name    value: 'Amin'
+  console.log("Insert Name");
+}
+
+function getName() {
+  let localName = localStorage.getItem("name");
+
+  console.log(localName);
+}
+
+function clearData() {
+  localStorage.clear();
+}
+
+// dar console
+
+localStorage.setItem("name", "react");
+localStorage.setItem("age", 18);
+localStorage.setItem("users", ["ali", "amin", "amir"]);
+localStorage.getItem("name");
+localStorage.getItem("age");
+localStorage.getItem("users");
+
+localStorage.setItem("users", JSON.stringify(["ali", "amin", "amir"]));
+JSON.parse(localStorage.getItem("users"));
+
+// dark mode
+
+const switchElement = document.querySelector(".switch");
+
+switchElement.addEventListener("click", function () {
+  // Hint: Add 'dark' class to body :))
+
+  document.body.classList.toggle("dark");
+
+  if (document.body.className.includes("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+
+  // console.log(document.body.className.includes('dark'));  // Boolean
+});
+
+window.onload = function () {
+  let localStorageTheme = localStorage.getItem("theme");
+
+  if (localStorageTheme === "dark") {
+    document.body.classList.add("dark");
+  }
+};
+
+// Local todo list
+
+let $ = document;
+const inputElem = $.getElementById("itemInput");
+const addButton = $.getElementById("addButton");
+const clearButton = $.getElementById("clearButton");
+const todoListElem = $.getElementById("todoList");
+
+let todosArray = [];
+
+function addNewTodo() {
+  let newTodoTitle = inputElem.value;
+
+  let newTodoObj = {
+    id: todosArray.length + 1,
+    title: newTodoTitle,
+    complete: false,
+  };
+
+  inputElem.value = "";
+
+  todosArray.push(newTodoObj);
+  setLocalStorage(todosArray);
+  todosGenerator(todosArray);
+
+  inputElem.focus();
+}
+
+function setLocalStorage(todosList) {
+  localStorage.setItem("todos", JSON.stringify(todosList));
+}
+
+function todosGenerator(todosList) {
+  let newTodoLiElem, newTodoLabalElem, newTodoCompleteBtn, newTodoDeleteBtn;
+
+  todoListElem.innerHTML = "";
+
+  todosList.forEach(function (todo) {
+    console.log(todo);
+    newTodoLiElem = $.createElement("li");
+    newTodoLiElem.className = "completed well";
+
+    newTodoLabalElem = $.createElement("label");
+    newTodoLabalElem.innerHTML = todo.title;
+
+    newTodoCompleteBtn = $.createElement("button");
+    newTodoCompleteBtn.className = "btn btn-success";
+    newTodoCompleteBtn.innerHTML = "Complete";
+    newTodoCompleteBtn.setAttribute("onclick", "editTodo(" + todo.id + ")");
+
+    newTodoDeleteBtn = $.createElement("button");
+    newTodoDeleteBtn.className = "btn btn-danger";
+    newTodoDeleteBtn.innerHTML = "Delete";
+    newTodoDeleteBtn.setAttribute("onclick", "removeTodo(" + todo.id + ")");
+
+    if (todo.complete) {
+      newTodoLiElem.className = "uncompleted well";
+      newTodoCompleteBtn.innerHTML = "UnComplete";
+    }
+
+    newTodoLiElem.append(
+      newTodoLabalElem,
+      newTodoCompleteBtn,
+      newTodoDeleteBtn
+    );
+
+    todoListElem.append(newTodoLiElem);
+  });
+}
+
+function editTodo(todoId) {
+  let localStorageTodos = JSON.parse(localStorage.getItem("todos"));
+
+  todosArray = localStorageTodos;
+
+  todosArray.forEach(function (todo) {
+    if (todo.id === todoId) {
+      todo.complete = !todo.complete;
+    }
+  });
+
+  setLocalStorage(todosArray);
+  todosGenerator(todosArray);
+}
+
+function removeTodo(todoId) {
+  let localStorageTodos = JSON.parse(localStorage.getItem("todos"));
+
+  todosArray = localStorageTodos;
+
+  let mainTodoIndex = todosArray.findIndex(function (todo) {
+    return todo.id === todoId;
+  });
+
+  todosArray.splice(mainTodoIndex, 1);
+
+  setLocalStorage(todosArray);
+  todosGenerator(todosArray);
+}
+
+function getLocalStorage() {
+  let localStorageTodos = JSON.parse(localStorage.getItem("todos"));
+
+  if (localStorageTodos) {
+    todosArray = localStorageTodos;
+  } else {
+    todosArray = [];
+  }
+
+  todosGenerator(todosArray);
+}
+
+function clearTodos() {
+  todosArray = [];
+  todosGenerator(todosArray);
+  // localStorage.clear()
+  localStorage.removeItem("todos");
+}
+
+window.addEventListener("load", getLocalStorage);
+addButton.addEventListener("click", addNewTodo);
+clearButton.addEventListener("click", clearTodos);
+inputElem.addEventListener("keydown", function (event) {
+  if (event.code === "Enter") {
+    addNewTodo();
+  }
+});
+
+// animaiton events
+
+const addAnimationBtn = document.querySelector(".button");
+const divElem = document.querySelector(".div");
+const pElem = document.querySelector("p");
+
+function setAnimation() {
+  // console.log(divElem);
+
+  divElem.style.animation = "move 4s 3";
+}
+
+function animationStartHandler(event) {
+  console.log("Animation Start");
+  pElem.innerHTML = "Animation Start";
+  divElem.style.backgroundColor = "pink";
+}
+
+function animationRepeatHandler() {
+  console.log("Animation Repeat");
+  pElem.innerHTML = "Animation Repeat";
+  divElem.style.backgroundColor = "green";
+}
+
+function animationEndHandler() {
+  console.log("Animation End");
+  pElem.innerHTML = "Animation End";
+  divElem.style.backgroundColor = "lightgray";
+}
+
+addAnimationBtn.addEventListener("click", setAnimation);
+
+divElem.addEventListener("animationstart", animationStartHandler);
+divElem.addEventListener("animationiteration", animationRepeatHandler);
+divElem.addEventListener("animationend", animationEndHandler);
+
+//////////////////////////////////
+
+// get computed style
+const boxElem = document.querySelector(".box");
+
+console.log(boxElem.style); // Just for inline styles
+
+let boxElemStyles = getComputedStyle(boxElem);
+
+console.log(boxElemStyles.backgroundColor);
+
+// css text
+boxElem.style.cssText = "color: red; background-color: green; font-size: 50px;";
+
+// slider project
+
+let $ = document;
+let sliderImgElem = $.querySelector("img");
+let prevBtn = $.querySelector(".prev");
+let nextBtn = $.querySelector(".next");
+
+let imgSrcArray = ["image/1.jpg", "image/2.png", "image/3.jpg"];
+
+let imgIndex = 0;
+
+function prevImage() {
+  imgIndex--;
+  if (imgIndex < 0) {
+    imgIndex = imgSrcArray.length - 1;
+  }
+  sliderImgElem.setAttribute("src", imgSrcArray[imgIndex]);
+  console.log(imgIndex, imgSrcArray[imgIndex]);
+}
+
+function nextImage() {
+  imgIndex++;
+  if (imgIndex > imgSrcArray.length - 1) {
+    imgIndex = 0;
+  }
+  sliderImgElem.setAttribute("src", imgSrcArray[imgIndex]);
+  console.log(imgIndex, imgSrcArray[imgIndex]);
+}
+
+setInterval(nextImage, 3000);
+
+prevBtn.addEventListener("click", prevImage);
+nextBtn.addEventListener("click", nextImage);
