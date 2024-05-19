@@ -6,52 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>events</title>
   </head>
-  <!-- <body onload="loadHandler()"> -->
-  <body oncontextmenu="contextHandler(event)">
-    <button onclick="clickHandler()" oncontextmenu="contextMenuHandler()">
-      Click On Me
-    </button>
-
-    <h3>Try to copy, cut or paste on editor</h3>
-    <textarea id="editor" cols="30" rows="10">
-It is my text editor. I am Learning js event</textarea
+  <body>
+    <h1
+      id="react"
+      draggable="true"
+      ondragstart="dragStartHandler(event)"
+      ondrag="console.log('Drag')"
+      ondragend="console.log('Drag End')"
     >
+      React Js
+    </h1>
+    <h1 id="vue" draggable="true" ondragstart="dragStartHandler(event)">
+      Vue Js
+    </h1>
+    <h1 id="angular" draggable="true" ondragstart="dragStartHandler(event)">
+      Angular Js
+    </h1>
 
-    <!-- <img src="img.png" alt="logo" onload="logoLoadHandler()" /> -->
+    <div
+      class="drop"
+      ondragenter="console.log('Drag Enter')"
+      ondragleave="console.log('Drag Leave')"
+      ondrop="dropHandler(event)"
+      ondragover="dragOverHandler(event)"
+    ></div>
 
-    <!-- DOMContentLoaded -->
+    <button onclick="insertName()">Insert Name</button>
+    <button onclick="getName()">Get Name</button>
+    <button onclick="clearData()">Clear Data</button>
 
-    <input
-      type="text"
-      id="name"
-      value="React Js"
-      onselect="selectHandler(event)"
-    />
+    <button class="button">Set Animation</button>
 
-    <div>
-      <audio src="media/music.mp3"></audio>
+    <p>No Animation</p>
 
-      <button onclick="playHandler()">Play Music</button>
-      <button onclick="pauseHandler()">pause Music</button>
-      <button onclick="durationHandler()">Show Music Duration</button>
-      <button onclick="currentTimeHandler()">Show Current Time</button>
-      <button onclick="playBackRateHandler()">2X</button>
+    <div class="div">This Div tag is a test for animation events</div>
 
-      <p id="time"></p>
-    </div>
-
-    <h1>Header</h1>
-    <button onclick="scrollByHandler()" id="btn">Go Down 100</button>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <button onclick="scrollTopHandler()">Go Up</button>
-
-    <!-- <script src="js/app.js" async></script> -->
-    <!-- <script src="js/app.js" defer></script> -->
-
-    <!-- <script defer>
-      console.log(document.getElementsByTagName('h1')[0]);
-    </script> -->
+    <div class="box" style="font-size: 29px">Box</div>
 
     <script src="script.js"></script>
   </body>
