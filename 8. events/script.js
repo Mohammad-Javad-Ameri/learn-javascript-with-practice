@@ -1228,3 +1228,117 @@ let textElem = document.getElementsByClassName("text")[0];
 title.style.color = "green";
 
 console.log(console);
+
+// event options
+
+const btn = document.querySelector("button");
+
+btn.addEventListener(
+  "click",
+  function () {
+    console.log("Click Shod :)");
+  },
+  { once: true }
+);
+
+// event delegation = event bubbling and event capturing
+
+const divElems = document.querySelectorAll("div");
+
+divElems.forEach(function (div, index) {
+  div.addEventListener(
+    "click",
+    function (event) {
+      console.log("Div " + (index + 1));
+      event.target.style.backgroundColor = "blue";
+    },
+    {
+      capture: true,
+    }
+  );
+});
+
+// stop event propagation
+
+const divElems = document.querySelectorAll("div");
+
+divElems.forEach(function (div, index) {
+  div.addEventListener(
+    "click",
+    function (event) {
+      event.stopPropagation();
+      console.log("Div " + (index + 1));
+      event.target.style.backgroundColor = "blue";
+    },
+    {
+      capture: true,
+    }
+  );
+});
+
+// usage of the event capture
+
+const listItems = document.querySelectorAll("li");
+const inputElem = document.querySelector("input");
+const languagesContainer = document.querySelector(".list");
+
+// listItems.forEach(function (listItem) {
+//     listItem.addEventListener('click', function (event) {
+//         console.log(event.target);
+//         event.target.remove()
+//     })
+// })
+
+languagesContainer.addEventListener("click", function (event) {
+  if (event.target.tagName === "LI") {
+    event.target.remove();
+  }
+});
+
+inputElem.addEventListener("keypress", function (event) {
+  if (event.keyCode === 13) {
+    let newLanguageLi = document.createElement("li");
+    newLanguageLi.innerHTML = event.target.value;
+
+    languagesContainer.append(newLanguageLi);
+
+    console.log(listItems);
+
+    inputElem.value = "";
+  }
+});
+
+// strict mode
+
+("use strict");
+
+// num = 2
+// number = 12
+// console.log(number, num);
+
+// function showValue (a, a) {
+//     // Codes
+// }
+
+// NaN = 12
+// undefined = 120
+
+// console.log(010 + 020); // Octal
+
+// let eval = 12
+
+// let username = 'Amin'
+
+// delete username
+
+num = 2;
+console.log(num);
+
+function showValue() {
+  "use strict";
+
+  numberVal = 34;
+  console.log(numberVal);
+}
+
+showValue();
