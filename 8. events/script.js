@@ -1342,3 +1342,233 @@ function showValue() {
 }
 
 showValue();
+
+// callback function
+
+const btn = document.querySelector("button");
+
+// function clickHandler () {
+//     console.log('Clicked');
+//     //  return undefined
+// }
+
+// btn.addEventListener('click', clickHandler)
+
+function logger(callbackFunc) {
+  // console.log(func);
+  console.log("logged (1)");
+  callbackFunc();
+}
+
+function logger2() {
+  console.log("Logged (2)");
+}
+
+// logger(logger2)
+
+let numbers = [1, 2, 3, 4, 5, 6];
+
+numbers.map(function (item) {
+  console.log(item);
+});
+
+// sync and async
+
+console.log(1);
+console.log(2);
+
+setTimeout(function () {
+  console.log(3);
+}, 5000);
+
+console.log(4);
+console.log(5);
+
+// usage of the callback function
+
+function firstLogs() {
+  console.log(1);
+  console.log(2);
+}
+
+function middleLog(callback) {
+  setTimeout(function () {
+    console.log(3);
+    callback();
+  }, 5000);
+}
+
+function lastLogs() {
+  console.log(4);
+  console.log(5);
+}
+
+firstLogs();
+middleLog(lastLogs);
+
+// real usage of callback function
+let books = [
+  { id: 1, name: "dobare fekr kon", price: 95000 },
+  { id: 2, name: "dar bab hekmat zendegi", price: 100000 },
+  { id: 3, name: "taamolat", price: 78000 },
+];
+
+function addBooks(name, price, callback) {
+  let newBook = {
+    id: books.length + 1,
+    name: name,
+    price: price,
+  };
+
+  setTimeout(function () {
+    books.push(newBook);
+    callback();
+  }, 4000);
+}
+
+function logBooks() {
+  console.log(books);
+}
+
+addBooks("raftar", 400000, logBooks);
+
+// pure function
+
+// Pure Function
+
+let testNumber = 100;
+
+console.log(testNumber);
+
+function pow(num1, num2) {
+  // return num1 ** num2
+
+  let testNum = 10;
+
+  // testNumber = 1000
+
+  return num1 ** num2 + testNum;
+
+  // return Math.random() * num1 * num2; // new Date
+}
+
+console.log(pow(2, 3)); // 8
+console.log(pow(2, 3)); // 8
+console.log(pow(2, 3)); // 8
+console.log(pow(2, 3)); // 8
+console.log(pow(2, 3)); // 8
+
+console.log(testNumber);
+
+// high order function
+function addNewBook(callbackFunc) {
+  // Codes callbackFunc()
+}
+
+// Higher Order Function
+
+function hofExp() {
+  return function () {
+    console.log("I am inner Function :)");
+  };
+}
+
+// hofExp()()
+
+let hofInner = hofExp();
+hofInner();
+
+let numbers = [1, 2, 3, 4, 5];
+
+numbers.map(function () {});
+
+// Spread Syntax
+
+let numbers = [1, 3, 2, 5, 4, 34];
+
+// console.log(numbers[0], numbers[1], numbers[2], numbers[3]);
+
+// numbers.forEach(number => console.log(number))
+
+// console.log(...numbers);
+
+// let copyNumbers = numbers
+
+// copyNumbers.push(90)
+
+// console.log('number:', numbers);
+// console.log('Copy number:', copyNumbers);
+
+let copyNumbers = [...numbers];
+
+copyNumbers.push(90);
+
+// console.log('number:', numbers);
+// console.log('Copy number:', copyNumbers);
+
+let nums1 = [1, 2, 3, 4];
+let nums2 = [5, 6, 7, 8];
+
+let allNumbers = [...nums1, 100, ...nums2];
+
+console.log(allNumbers);
+
+// Spread Syntax Es6
+
+// let nums = [2, 4, 1]
+
+// function sum (a, b, c) {
+//     console.log('a: ', a);
+//     console.log('b: ', b);
+//     console.log('c: ', c);
+//     return a + b + c
+// }
+
+// // console.log(sum(2, 4, 1 ));
+// console.log(sum(...nums))
+
+/////////////////////////////////////////////////////////////////////
+
+// Spread Syntax Es9
+
+let user = {
+  id: 1,
+  name: "Ali",
+  age: 22,
+};
+
+let newUser = { ...user };
+
+newUser.age = 24;
+
+console.log("User", user);
+console.log("New User", newUser);
+
+// arguments
+
+function sum(a, b, c) {
+  console.log("a", a);
+  console.log("b", b);
+  console.log("c", c);
+  console.log(arguments);
+  return a + b + c;
+}
+
+console.log(sum(2, 1, 4, 5, 2, 10));
+
+function sum(a, b, c) {
+  // console.log('a', a);
+  // console.log('b', b);
+  // console.log('c', c);
+  // console.log(arguments);
+
+  let sumAllArgs = 0;
+
+  let arrayArgs = Array.from(arguments);
+
+  arrayArgs.forEach((item) => (sumAllArgs += item));
+
+  return sumAllArgs;
+}
+
+console.log(sum(2, 1, 4, 5, 2, 10));
