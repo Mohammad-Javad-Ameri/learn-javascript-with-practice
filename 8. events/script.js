@@ -1434,8 +1434,6 @@ addBooks("raftar", 400000, logBooks);
 
 // pure function
 
-// Pure Function
-
 let testNumber = 100;
 
 console.log(testNumber);
@@ -1513,7 +1511,7 @@ let allNumbers = [...nums1, 100, ...nums2];
 
 console.log(allNumbers);
 
-// Spread Syntax Es6
+// mesal digar Spread Syntax Es6
 
 // let nums = [2, 4, 1]
 
@@ -1529,7 +1527,7 @@ console.log(allNumbers);
 
 /////////////////////////////////////////////////////////////////////
 
-// Spread Syntax Es9
+// Spread Syntax Es9 in objects
 
 let user = {
   id: 1,
@@ -1572,3 +1570,287 @@ function sum(a, b, c) {
 }
 
 console.log(sum(2, 1, 4, 5, 2, 10));
+
+// Rest Operator
+
+const sum = (a, ...args) => {
+  console.log("a", a);
+  // console.log('b', b);
+  // console.log('c', c);
+  console.log("args", args);
+  // console.log(arguments);
+
+  let sumAllArgs = 0;
+
+  args.forEach((item) => (sumAllArgs += item));
+
+  return sumAllArgs;
+};
+
+console.log(sum(2, 1, 4, 5, 2, 10));
+
+// goftan inke rest bayad akharin parameter bashe
+// goftan tafavot rest va spread
+
+/////////////////////////////////////////////////////////////////////
+
+// Array Destructuring
+
+let user = [1, "Ali", 12];
+//old way
+// let userID = user[0]
+// let userName = user[1]
+// let userAge = user[2]
+
+let [userID, userName, userAge] = user;
+
+// console.log('userID', userID);
+// console.log('userName', userName);
+// console.log('userAge', userAge);
+
+// const showNumbers = () => [1, 3, 4, 2, 7, 8];
+let num = [1, 3, 4, 2, 7, 8];
+
+let [firstNum, , , secondNum, thirdNum] = num;
+
+console.log(firstNum);
+console.log(secondNum);
+console.log(thirdNum);
+
+// mesal digar az array destructuring
+
+// let user = [1, 'ali', 21, 'Tehran']
+
+// let [userID, userName, userAge, userCity = 'Tabriz'] = user
+
+// console.log(userID);
+// console.log(userName);
+// console.log(userAge);
+// console.log(userCity);
+
+/////////////////////////////////////////////////////////////////////
+// objects destructuring
+
+let user = {
+  id: 1,
+  // name: 'Ali',
+  age: 22,
+};
+
+// let id = user.id
+// let name = user.name
+// let age = user.age
+
+// tartib nadashtan object destructuring
+let { age, name = "amin", id: userID } = user;
+
+console.log(userID);
+console.log(name);
+console.log(age);
+
+/////////////////////////////////////////////////////
+
+let users = [
+  { id: 1, name: "ali", age: 22, email: "ali@gmail.com" },
+  { id: 2, name: "amin", age: 20, email: "amin@gmail.com" },
+  { id: 3, name: "qadir", age: 18, email: "qadir@gmail.com" },
+  { id: 4, name: "sasan", age: 32, email: "sasan@gmail.com" },
+];
+
+const getUser = (userID) => {
+  let mainUser = users.find((user) => user.id == userID);
+
+  return mainUser;
+};
+
+// let {name: userName, email: userEmail} = getUser(4)
+
+// console.log("UserName:", userName);
+// console.log("UserEmail:", userEmail);
+
+/////////////////////////////////////////////////////////////////////
+
+const userIDInput = document.querySelector("#user-id");
+
+userIDInput.addEventListener("keypress", (event) => {
+  let { keyCode, target: input } = event;
+
+  if (keyCode === 13) {
+    let { name, email } = getUser(input.value);
+
+    console.log("UserName:", name);
+    console.log("UserEmail:", email);
+  }
+});
+///////////////////////////////////////////////////////////////
+// For of
+
+let numbers = [1, 3, 2, 5, 4];
+let userName = "ali";
+
+// Iterable => قابل پیمایش - قابل شمارش
+
+// for (let item of numbers) {
+//     console.log(item);
+// }
+
+let userName = "ali";
+
+// for (let str of userName) {
+//     console.log(str);
+// }
+
+let user = {
+  id: 1,
+  name: "Ali",
+  age: 19,
+};
+
+// for (let property of user) {
+//     console.log(property);
+// }
+
+////////////////////////////////////////////////////////////
+
+// mesal digar az for of
+
+// Iterable => قابل پیمایش - قابل شمارش
+// Like-Array
+
+function sum() {
+  console.log(arguments);
+  // arguments.forEach()
+
+  let allArgsSum = 0;
+
+  for (let arg of arguments) {
+    allArgsSum += arg;
+  }
+
+  return allArgsSum;
+}
+
+// console.log('Sum: ', sum(1, 2, 3, 4));
+
+/////////////////////////////////////////////////////////
+
+let liElems = document.getElementsByTagName("li");
+
+// liElems.forEach()
+
+for (let li of liElems) {
+  console.log(li);
+  li.addEventListener("click", (e) => e.target.remove());
+}
+
+// console.log(liElems);
+
+// for in for objects
+
+let user = {
+  id: 1,
+  name: "Ali",
+  age: 19,
+};
+
+for (let item in user) {
+  // console.log(item)
+  console.log(`user.${item}: ${user[item]}`);
+}
+
+// modular app.js
+
+const users = [
+  { id: 18, name: "Ali", age: 22 },
+  { id: 29, name: "Amin", age: 23 },
+  { id: 36, name: "Amir", age: 19 },
+  { id: 41, name: "Sasan", age: 28 },
+  { id: 54, name: "Qadir", age: 20 },
+];
+
+function isLogin(userID) {
+  let isUserInUsers = users.some((user) => user.id === userID);
+
+  return isUserInUsers;
+}
+console.log(isLogin(12));
+
+// sakht func.js dar kenar app.js
+// import kardan islogin from './func.js'
+
+///////////////////////////////////////////////////////////
+
+// file nahayi app.js
+
+import { isLogin, userRegister, usersCount as usersLength } from "./funcs.js";
+
+let newUserName = prompt("Enter User Name: ");
+let newUserAge = prompt("Enter User Age: ");
+
+console.log("Users Count:", usersLength);
+
+// console.log(userRegister(newUserName, newUserAge));
+
+console.log(isLogin(41));
+
+// file nahayi func.js
+
+const users = [
+  { id: 18, name: "Ali", age: 22 },
+  { id: 29, name: "Amin", age: 23 },
+  { id: 36, name: "Amir", age: 19 },
+  { id: 41, name: "Sasan", age: 28 },
+  { id: 54, name: "Qadir", age: 20 },
+];
+
+export let usersCount = users.length;
+
+export function isLogin(userID) {
+  let isUserInUsers = users.some((user) => user.id === userID);
+
+  return isUserInUsers;
+}
+
+export function userRegister(name, age) {
+  let newUserObj = {
+    id: Math.floor(Math.random() * 100),
+    name: name,
+    age: age,
+  };
+
+  users.push(newUserObj);
+
+  return users;
+}
+
+// export { isLogin, userRegister, usersCount }
+
+//////////////////////////////////////////////////////////////////////
+// export default
+
+// app.js
+
+// import mohammad from './funcs.js'
+import * as funcs from "./funcs.js";
+
+console.log(funcs.isLogin(29));
+
+// console.log('Users Count:', mohammad);
+
+// funcs.js mesl qabl faqat
+
+export { isLogin, userRegister, usersCount };
+// export default usersCount
+
+// type coercion
+
+// Type Coercion (Implicit = اجباری و زوری - Explicit = صریح و واضح)
+
+// let userAge = Number(prompt('Enter Your Age: ', 18))
+
+// console.log('User Age:', userAge);
+// console.log('User Age Type:', typeof userAge);
+
+true + false;
+true + true;
+12 / "3";
