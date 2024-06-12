@@ -1854,3 +1854,384 @@ export { isLogin, userRegister, usersCount };
 true + false;
 true + true;
 12 / "3";
+
+// Regex
+
+// let regexCode = /amin/
+// let regexCode = /a.m/
+let regexCode = /a.+n/;
+
+let text = "I afsmbokfsmbosfikbn, Web Developer";
+
+console.log(regexCode.test(text));
+
+// a()m
+// a()()()()()()n
+
+// Regex Email example
+
+let emailRegEx = /.+@.+.com/;
+
+let userEmail = prompt("Plz Enter Your Email: ");
+
+console.log(emailRegEx.test(userEmail));
+
+// amin@gmail.com  babak@gmail.com  amir_amiri@gmail.com
+
+//////////////////////////////////////////////////////////////////
+
+// This Keyword
+
+function removeListItem(el) {
+  el.remove();
+
+  console.log(el);
+}
+
+// /////////////////////////////////////////////////////
+
+function sumNumbers() {
+  let sum = 0;
+
+  for (let arg of arguments) {
+    sum += arg;
+  }
+
+  console.log("This in function:", this);
+
+  return sum;
+}
+
+// console.log('Sum:', sumNumbers(2, 5, 3));
+
+// /////////////////////////////////////////////////////
+
+let user = {
+  id: 1,
+  name: "Amin",
+  age: 22,
+
+  walk: function () {
+    console.log("User Walked");
+  },
+
+  showThis: function () {
+    console.log(this); // this user object
+  },
+
+  setName: function (newName) {
+    this.name = newName;
+  },
+
+  setAge: function (newAge) {
+    this.age = newAge;
+  },
+};
+
+user.setName("Ali");
+user.setAge(25);
+
+console.log(user);
+
+/////////////////////////////// Call Apply Bind
+
+let user = {
+  id: 1,
+  username: "Amin",
+  age: 22,
+};
+
+let user2 = {
+  id: 2,
+  username: "Ali",
+  age: 19,
+};
+
+function showUser(score, city) {
+  console.log(
+    this.username + " Is " + this.age + " Years Old :) => Score:",
+    score,
+    "City: " + city
+  );
+}
+
+// showUser.call(user, 20, 'Tabriz')
+// showUser.call(user2, 14, 'Tehran')
+
+// showUser.apply(user, [20, 'Tabriz'])
+// showUser.apply(user2, [14, 'Tehran'])
+
+showUser.bind(user, 20, "Tabriz")();
+let bindingFunc = showUser.bind(user2, 14, "Tehran");
+bindingFunc();
+
+//////////////////////// Usage of call bind and apply
+
+let user = {
+  id: 1,
+  username: "Amin",
+  age: 22,
+
+  walk: function () {
+    console.log(this.username);
+  },
+
+  // aboutUser: function () {
+  //     console.log('this in aboutUser', this);
+
+  //     setTimeout(function () {
+
+  //         console.log('this in setTimeout', this);
+  //         console.log(this.username + ' is ' + this.age + ' years old');
+
+  //     }.bind(user), 3000);
+  // }
+
+  aboutUser: function () {
+    console.log("this in aboutUser", this);
+
+    setTimeout(() => {
+      console.log("this in setTimeout", this);
+      console.log(this.username + " is " + this.age + " years old");
+    }, 3000);
+  },
+};
+
+let user2 = {
+  id: 2,
+  username: "Ali",
+  age: 19,
+};
+
+user.aboutUser();
+
+// DRY => Don't ...
+
+///////////////////////Constractor Function
+
+// DRY => Don't ...
+
+// function Animal () {
+//     this.name = 'dog'
+//     this.color = 'brown'
+//     this.canFly = false
+//     this.footsCount = 4
+// }
+
+// let dogAnimal = new Animal()
+
+// let dogAnimal2 = new Animal()
+
+// console.log(dogAnimal2);
+
+///////////////////////////////////////////////////////////////
+
+function Person(personID, personUserName, personAge, personJob, personType) {
+  this.id = personID;
+  this.username = personUserName;
+  this.age = personAge;
+  this.job = personJob;
+  this.type = personType;
+}
+
+let userAli = new Person(1, "Ali", 19, "Digital Marketing", "user");
+let userAmin = new Person(2, "Amin", 22, "Js Developer", "Admin");
+
+console.log(userAmin);
+
+///////////////////////// Nullish Coalescing Operator
+
+// let port = NaN
+
+// let developingPort = port || 3003 // falsy value => Truthy value
+
+// console.log(developingPort);
+
+///////////////////////  Nullish Operator (null, undefined)  ///////////////////////////////
+
+let port = undefined;
+let testPort = 0;
+
+let developingPort = (testPort || port) ?? 3000;
+
+console.log(developingPort);
+
+///////////////////////////// optional chaining
+
+let user = {
+  id: 1,
+  username: "Amin",
+  age: 22,
+
+  address: {
+    country: "Iran",
+  },
+};
+
+// let userStreet = user.address.city ? user.address.city.street : undefined
+
+let userStreet = user.address.city?.street;
+
+console.log(userStreet);
+
+/////////////////////////////// Entries
+
+let person = {
+  id: 1,
+  firstName: "Amin",
+  lastName: "Saeedi Rad",
+  age: 22,
+  job: "Web Developer",
+};
+
+let entriesPerson = Object.entries(person);
+
+for (let userProps of entriesPerson) {
+  console.log(`${userProps[0]} : ${userProps[1]}`);
+}
+
+console.log(entriesPerson);
+
+//////////////////////////////// Set
+
+let user = {
+  id: 1,
+  username: "Amin",
+  age: 22,
+};
+
+// Set, Map
+
+// //////////////////////////////////////////////////////
+
+let numbers = new Set();
+
+numbers.add(20);
+numbers.add(12);
+numbers.add(20);
+numbers.add(12);
+numbers.add(10);
+numbers.add(90);
+numbers.add(100);
+
+let arrayNumbers = [...numbers];
+
+// console.log(numbers, typeof numbers);
+// console.log(arrayNumbers);
+
+for (let number of numbers) {
+  console.log(number);
+}
+
+// console.log(numbers.has(12));
+
+// console.log('Before Delete', numbers, ' && Size =>', numbers.size);
+
+// numbers.delete(20)
+
+// console.log('After Delete', numbers, ' && Size =>', numbers.size);
+
+// numbers.clear()
+
+// console.log('After Clear', numbers, ' && Size =>', numbers.size);
+
+// numbers.forEach(number => console.log(number))
+
+// let scores = [
+//     12,
+//     17,
+//     89,
+//     90,
+//     43,
+//     21,
+//     17,
+//     12,
+//     21
+// ]
+// let setScores = new Set(scores)
+// let setScores = new Set([1, 5, 2, 1, 2, 5, 6])
+
+// console.log('Scores Array:', scores);
+// console.log('Scores Set:', setScores);
+
+// set 2
+
+// let userName = 'Mohammad Amin' // Iterable
+
+// let setUserName = new Set(userName)
+
+// console.log(setUserName);
+
+///////////////////////////////////////////
+
+let itemOne = { id: 1 };
+let itemTwo = { id: 2 };
+let itemThree = { id: 3 };
+
+let setItemsData = new Set();
+
+setItemsData.add(22);
+setItemsData.add(itemOne);
+
+console.log(setItemsData.has({ id: 1 }));
+
+///////////////////////// Map
+
+// Map
+
+// let user = {
+//     id: 1,
+//     firstName: 'Qadir',
+//     lastName: 'Yolme',
+//     age: 20
+// }
+
+// for (let userProp of user) {
+//     // Codes ...
+// }
+
+// console.log(user);
+
+let userMap = new Map();
+
+userMap.set("id", 1);
+userMap.set("firstName", "Qadir");
+userMap.set("lastName", "Yolme");
+userMap.set("age", 20);
+
+// tabdil be object
+let userObj = Object.fromEntries(userMap);
+
+console.log(userObj);
+
+console.log(userMap);
+
+// console.log('UserMap Before Delete', userMap, '&& Size:', userMap.size);
+
+// userMap.delete('age')
+
+// console.log('UserMap After Delete', userMap, '&& Size:', userMap.size);
+
+// console.log(userMap.get('firstName'));
+
+// userMap.clear()
+
+// console.log('UserMap After Clear:', userMap);
+
+// console.log(userMap.has('lastName'));
+
+// userMap.forEach((value, key) => console.log(`${key}: ${value}`))
+
+///////////////////////////////////////////
+
+// let user = {
+//     id: 1,
+//     firstName: 'Qadir',
+//     lastName: 'Yolme',
+//     age: 20
+// }
+
+// let userMap = new Map(Object.entries(user))
+
+// console.log(user);
+// console.log(userMap);
