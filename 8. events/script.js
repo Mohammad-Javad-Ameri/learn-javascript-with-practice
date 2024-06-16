@@ -2094,6 +2094,18 @@ console.log(entriesPerson);
 
 //////////////////////////////// Set
 
+// let scores = [
+//     12,
+//     17,
+//     89,
+//     90,
+//     43,
+//     21,
+//     17,
+//     12,
+//     21
+// ]
+
 let user = {
   id: 1,
   username: "Amin",
@@ -2114,17 +2126,6 @@ numbers.add(10);
 numbers.add(90);
 numbers.add(100);
 
-let arrayNumbers = [...numbers];
-
-// console.log(numbers, typeof numbers);
-// console.log(arrayNumbers);
-
-for (let number of numbers) {
-  console.log(number);
-}
-
-// console.log(numbers.has(12));
-
 // console.log('Before Delete', numbers, ' && Size =>', numbers.size);
 
 // numbers.delete(20)
@@ -2135,7 +2136,11 @@ for (let number of numbers) {
 
 // console.log('After Clear', numbers, ' && Size =>', numbers.size);
 
+// console.log(numbers.has(12));
+
 // numbers.forEach(number => console.log(number))
+
+/////////// tabdil array be set
 
 // let scores = [
 //     12,
@@ -2153,6 +2158,27 @@ for (let number of numbers) {
 
 // console.log('Scores Array:', scores);
 // console.log('Scores Set:', setScores);
+
+//////////// tabdil set be array
+
+let numbers = new Set();
+
+numbers.add(20);
+numbers.add(12);
+numbers.add(20);
+numbers.add(12);
+numbers.add(10);
+numbers.add(90);
+numbers.add(100);
+
+let arrayNumbers = [...numbers];
+
+// console.log(numbers, typeof numbers);
+// console.log(arrayNumbers);
+
+for (let number of numbers) {
+  console.log(number);
+}
 
 // set 2
 
@@ -2172,8 +2198,8 @@ let setItemsData = new Set();
 
 setItemsData.add(22);
 setItemsData.add(itemOne);
-
-console.log(setItemsData.has({ id: 1 }));
+console.log(setItemsData.has(22)); //true
+console.log(setItemsData.has({ id: 1 })); // false
 
 ///////////////////////// Map
 
@@ -2181,8 +2207,8 @@ console.log(setItemsData.has({ id: 1 }));
 
 // let user = {
 //     id: 1,
-//     firstName: 'Qadir',
-//     lastName: 'Yolme',
+//     firstName: 'ali',
+//     lastName: 'saeedi',
 //     age: 20
 // }
 
@@ -2195,16 +2221,9 @@ console.log(setItemsData.has({ id: 1 }));
 let userMap = new Map();
 
 userMap.set("id", 1);
-userMap.set("firstName", "Qadir");
-userMap.set("lastName", "Yolme");
+userMap.set("firstName", "ali");
+userMap.set("lastName", "saeedi");
 userMap.set("age", 20);
-
-// tabdil be object
-let userObj = Object.fromEntries(userMap);
-
-console.log(userObj);
-
-console.log(userMap);
 
 // console.log('UserMap Before Delete', userMap, '&& Size:', userMap.size);
 
@@ -2224,10 +2243,12 @@ console.log(userMap);
 
 ///////////////////////////////////////////
 
+// tabdil object be map
+
 // let user = {
 //     id: 1,
-//     firstName: 'Qadir',
-//     lastName: 'Yolme',
+//     firstName: 'ali',
+//     lastName: 'saeedi',
 //     age: 20
 // }
 
@@ -2235,3 +2256,265 @@ console.log(userMap);
 
 // console.log(user);
 // console.log(userMap);
+
+// tabdil map be object
+let userMap = new Map();
+
+userMap.set("id", 1);
+userMap.set("firstName", "ali");
+userMap.set("lastName", "saeedi");
+userMap.set("age", 20);
+
+let userObj = Object.fromEntries(userMap);
+
+console.log(userObj);
+
+console.log(userMap);
+
+////////////////////////////////// CRUD - Proxy
+
+let user = {
+  id: 1,
+  firstName: "ali",
+  lastName: "Saeedi",
+  age: 22,
+};
+
+// user.job = 'Web Developer'
+
+// console.log(user.firstName) // Read
+
+// console.log(user);
+
+let userProxy = new Proxy(user, {});
+
+console.log("User:", user.firstName);
+console.log("Proxy User:", userProxy.firstName);
+
+console.log(user.email); // undefined
+
+// CRUD - Proxy (Get Trap) || (in)
+
+let user = {
+  id: 1,
+  firstName: "ali",
+  lastName: "Saaedi",
+  age: 22,
+};
+
+user = new Proxy(user, {
+  get: function (target, property) {
+    console.log("Target:", target);
+    console.log("Property:", property);
+
+    // return target[property] ? target[property] : 'Amin'
+    return property in target ? target[property] : null;
+  },
+});
+
+// console.log('User Object:', user.phone);
+console.log("User Proxy:", user.id);
+
+// CRUD - Proxy (Set Trap) || (in)
+
+let user = {
+  id: 1,
+  firstName: "ali",
+  lastName: "Saaedi",
+};
+
+user = new Proxy(user, {
+  get: function (target, property) {
+    console.log("Target:", target);
+    console.log("Property:", property);
+
+    // return target[property] ? target[property] : 'Amin'
+    return property in target ? target[property] : null;
+  },
+
+  set: function (target, property, value) {
+    console.log("target:", target);
+    console.log("property:", property);
+    console.log("value:", value);
+
+    if (property === "age" && value < 18) {
+      throw new Error("This Value Is Not Valid");
+    }
+  },
+});
+
+user.age = 33;
+
+console.log(user.age);
+
+// tahghigh dar rabete ba symbel ha
+
+// callback hell and promises
+
+//async vs sync
+//sync
+console.log("1");
+console.log("2");
+console.log("3");
+console.log("4"); //output: 1 2 3 4
+//async
+console.log("1");
+setTimeout(function () {
+  console.log("2"); //executes after 3 seconds
+}, 3000);
+console.log("3");
+console.log("4"); //output: 1 3 4 2
+
+let books = [
+  { id: 1, name: "Bi Shouri", price: 95000 },
+  { id: 2, name: "Bimarefat", price: 56660 },
+  { id: 3, name: "pedar", price: 75000 },
+];
+
+function addBook(name, price, callback) {
+  let newBook = {
+    id: books.length + 1,
+    name: name,
+    price: price,
+  };
+
+  setTimeout(function () {
+    books.push(newBook);
+    callback();
+  }, 4000);
+}
+
+function logBooks() {
+  console.log(books);
+}
+addBook("golestan", 90_000, logBooks);
+
+let myPromise = new Promise(() => {
+  setTimeout(() => {
+    console.log("Login check !!");
+  }, 3000);
+});
+
+myPromise();
+
+//promise ES6 - for asycronize programming and good for preventing callback hell with callback functions
+//forexample thing like checking user login from database which takes time we use promises to do that
+let myPromisee = new Promise((resolve, reject) => {
+  //if we do the promise we cal resolve and if we dont we call reject
+  let loginFlag = true;
+  setTimeout(() => {
+    console.log("Login check !!");
+    if (loginFlag) {
+      resolve();
+    } else {
+      reject();
+    }
+  }, 3000);
+});
+function success() {
+  console.log("success :)");
+}
+function error() {
+  console.log("error :(");
+}
+myPromise.then(success, error);
+//or
+myPromise
+  .then(success)
+  .catch(error)
+  .finally(() => {
+    //this will execute whether promis is resolved or rejected
+    console.log("promise is done.");
+  });
+//another example
+let books = [
+  { id: 1, name: "Bi Shouri", price: 95000 },
+  { id: 2, name: "Bimarefat", price: 56660 },
+  { id: 3, name: "pedar", price: 75000 },
+];
+function addBook(name, price) {
+  let newBook = {
+    id: books.length + 1,
+    name: name,
+    price: price,
+  };
+  return new Promise((resolve, reject) => {
+    setTimeout(function () {
+      if (books.push(newBook)) {
+        resolve();
+      } else {
+        reject();
+      }
+    }, 4000);
+  });
+}
+addBook("golestan", 90_000)
+  .then(() => {
+    console.log("success", books);
+  })
+  .catch(() => {
+    console.log("error");
+  });
+//in these examples we used timeout because we dont have an api that takes time right now
+//phases of promise: pending=no resolve and no reject , fullfilled:resolved , rejected: rejects
+//we can have multiple .then and if promise resolved first .then()happens and first .then() returns a value and next then() gets the value from its input
+
+// ersal parameter be promise
+if (books.push(newBook)) {
+  resolve("mitavanid sabt konid");
+} else {
+  reject(new Error("book not found"));
+}
+addBook("golestan", 90_000)
+  .then((success) => {
+    console.log(success, books);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+// goftan finally in promise
+myPromise
+  .then(success)
+  .catch(error)
+  .finally(() => {
+    //this will execute whether promis is resolved or rejected
+    console.log("promise is done.");
+  });
+
+// chaining handling in promise
+let wordPromise = new Promise((resolve, reject) => {
+  let text = "hello";
+  if (text) {
+    resolve(text);
+  } else {
+    reject(new Error("text not found"));
+  }
+});
+
+wordPromise
+  .then((text) => {
+    console.log(text);
+    return text.split("");
+  })
+  .then((text2) => {
+    console.log(text2);
+    return text2.reverse();
+  })
+  .then((text3) => {
+    console.log(text3);
+    return text3.join("");
+  })
+  .then((text4) => {
+    console.log(text4);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+// make it in one line
+wordPromise
+  .then((text) => text.split(""))
+  .then((text2) => text2.reverse())
+  .then((text3) => text3.join(""))
+  .then((text4) => console.log(text4))
+  .catch((err) => console.log(err));
