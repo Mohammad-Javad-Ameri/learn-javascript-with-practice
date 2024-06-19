@@ -2518,3 +2518,249 @@ wordPromise
   .then((text3) => text3.join(""))
   .then((text4) => console.log(text4))
   .catch((err) => console.log(err));
+
+// ajax
+// api
+// http method
+
+//json
+let users = [
+  {
+    id: 1,
+    username: "Amin",
+    password: 1010,
+  },
+  {
+    id: 2,
+    username: "Amir",
+    password: 0000,
+  },
+  {
+    id: 1,
+    username: "Ali",
+    password: 1122,
+  },
+];
+
+let jsonData =
+  '[{"id":1,"username":"Amin","password":1010},{"id":2,"username":"Amir","password":0},{"id":1,"username":"Ali","password":1122}]';
+
+console.log(JSON.parse(jsonData));
+
+// fetch (get)
+
+const btn = document.querySelector("button");
+
+btn.addEventListener("click", () => {
+  fetch("https://randomuser.me/api/", {
+    method: "GET",
+  }) // Get
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+      return new Error("Error :/");
+    })
+    .then((data) => {
+      console.log("Data:", data.results[0]);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+// fetch (post)
+
+const $ = document;
+
+const firstname = $.querySelector(".firstname");
+const lastname = $.querySelector(".lastname");
+const password = $.querySelector(".password");
+const button = $.querySelector("button");
+
+button.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  let userData = {
+    firstname: firstname.value,
+    lastname: lastname.value,
+    password: password.value,
+  };
+
+  fetch("http://localhost:3000/api/users", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  }).then((res) => console.log(res));
+});
+
+// firstname - lastname - password
+// Get - Post
+// localhost:3000/api/users
+
+// fetch all users
+const usersContainer = document.querySelector("#wrap-users");
+
+window.addEventListener("load", () => {
+  fetch("https://randomuser.me/api/?results=10")
+    .then((res) => res.json())
+    .then((data) => {
+      data.results.forEach((user) => {
+        usersContainer.insertAdjacentHTML(
+          "beforeend",
+          `
+                <div class="user">
+                <div class="user-profile-wrap">
+                    <img class="user-profile" src="${user.picture.large}" alt="user-image">
+                    <div class="user-profile-description">
+                        <h1 class="user-profile-name">${user.name.first} - ${user.name.last}<span class="user-age">${user.dob.age}</span> </h1>
+                        <h3 class="user-explanations">Pass: ${user.login.password}</h3>
+                    </div>
+                </div>
+                <div class="btn-groups-column">
+                    <button class="delete-user-btn">delete</button>
+                    <button class="edit-user-btn">edit</button>
+                </div>
+            </div>
+                `
+        );
+      });
+    });
+});
+
+// delete user
+
+function deleteUser() {
+  fetch(`http://localhost:3000/api/users/${userID}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+
+  closeModal();
+}
+
+// update user
+
+function updateUser() {
+  let userData = {
+    firstname: firstname.value,
+    lastname: lastname.value,
+    password: password.value,
+  };
+
+  fetch(`http://localhost:3000/api/users/${userID}`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  }).then((res) => console.log(res));
+
+  closeEditModal();
+  getAllUsers();
+}
+
+// JsonPlaceHolder
+
+// window.addEventListener('load', () => {
+//     fetch('https://jsonplaceholder.typicode.com/posts') // Get
+//         .then(res => res.json())
+//         .then(data => {
+//             data.forEach(post => console.log(post))
+//         })
+// })
+
+//////////////////////////////////////////////////////////////////
+
+let url = "https://jsonplaceholder.typicode.com/posts/";
+
+let postID = prompt("Enter The PostID That you want: ");
+
+fetch(`${url}${postID}`)
+  .then((res) => res.json())
+  .then((mainPost) => console.log(mainPost));
+
+// wheatehr project
+
+const inputElem = document.querySelector("input");
+
+let apiData = {
+  url: "https://api.openweathermap.org/data/2.5/weather?q=",
+  key: "26c4d8ad14b57209671494df9bd9fcb9",
+};
+
+function fetchData() {
+  let countryValue = inputElem.value;
+
+  fetch(`${apiData.url}${countryValue}&&appid=${apiData.key}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+
+      showData(data);
+    });
+}
+
+function showData(data) {
+  let cityElem = document.querySelector(".city");
+  cityElem.innerHTML = `${data.name}, ${data.sys.country}`;
+
+  let dateElem = document.querySelector(".date");
+  dateElem.innerHTML = showDate();
+
+  let tempElem = document.querySelector(".temp");
+  tempElem.innerHTML = `${Math.floor(data.main.temp - 273.15)}°c`;
+
+  let weatherElem = document.querySelector(".weather");
+  weatherElem.innerHTML = `${data.weather[0].main}`;
+
+  let tempsElem = document.querySelector(".hi-low");
+  tempsElem.innerHTML = `${Math.floor(
+    data.main.temp_min - 273.15
+  )}°c / ${Math.floor(data.main.temp_max - 273.15)}°c`;
+}
+
+function showDate() {
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let now = new Date();
+
+  let day = days[now.getDay()];
+  let month = months[now.getMonth()];
+  let year = now.getFullYear();
+  let date = now.getDate();
+
+  return `${day} ${date} ${month} ${year}`;
+}
+
+inputElem.addEventListener("keypress", (event) => {
+  if (event.keyCode === 13) {
+    fetchData();
+  }
+});
