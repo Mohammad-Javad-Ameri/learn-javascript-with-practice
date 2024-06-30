@@ -2764,3 +2764,601 @@ inputElem.addEventListener("keypress", (event) => {
     fetchData();
   }
 });
+
+// crud operation
+
+// Fetch all items and populate the table on page load
+window.onload = function () {
+  getAllItems().then(function (items) {
+    populateTable(items);
+  });
+};
+
+// Function to fetch all items
+function getAllItems() {
+  return fetch("http://localhost:5000/items")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      return data;
+    })
+    .catch(function (error) {
+      console.error("Error fetching items:", error);
+      return [];
+    });
+}
+
+// Function to create a new item
+function createItem(item) {
+  return fetch("http://localhost:5000/items", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(item),
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      return data;
+    })
+    .catch(function (error) {
+      console.error("Error creating item:", error);
+      return null;
+    });
+}
+
+// Function to update an item by ID
+function updateItem(id, updatedItem) {
+  return fetch(`http://localhost:5000/items/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedItem),
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      return data;
+    })
+    .catch(function (error) {
+      console.error("Error updating item:", error);
+      return null;
+    });
+}
+
+// Function to delete an item by ID
+function deleteItem(id) {
+  return fetch(`http://localhost:5000/items/${id}`, {
+    method: "DELETE",
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // Refresh the table after deleting the item
+      return getAllItems().then(function (items) {
+        populateTable(items);
+        return data;
+      });
+    })
+    .catch(function (error) {
+      console.error("Error deleting item:", error);
+      return null;
+    });
+}
+
+// Function to populate the table with items
+function populateTable(items) {
+  const table = document.getElementById("mytable");
+  table.innerHTML = ""; // Clear the table first
+
+  items.forEach(function (item, index) {
+    const row = table.insertRow();
+
+    const idCell = row.insertCell(0);
+    idCell.textContent = index + 1;
+
+    const nameCell = row.insertCell(1);
+    nameCell.textContent = item.name;
+
+    const quantityCell = row.insertCell(2);
+    quantityCell.textContent = item.quantity;
+
+    const priceCell = row.insertCell(3);
+    priceCell.textContent = item.price;
+
+    const actionCell = row.insertCell(4);
+    actionCell.innerHTML = `
+      <button class="btn btn-warning" onclick="editItem('${item._id}', '${item.name}', ${item.quantity}, ${item.price})">Edit</button>
+      <button class="btn btn-danger" onclick="deleteItem('${item._id}')">Delete</button>
+    `;
+  });
+}
+
+// Function to handle form submission
+document
+  .getElementById("itemForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("itemName").value;
+    const quantity = document.getElementById("itemQuantity").value;
+    const price = document.getElementById("itemPrice").value;
+
+    const item = {
+      name: name,
+      quantity: quantity,
+      price: price,
+    };
+
+    if (this.dataset.id) {
+      // Update existing item
+      updateItem(this.dataset.id, item).then(function () {
+        delete document.getElementById("itemForm").dataset.id;
+        document.getElementById("submitBtn").textContent = "Add Item";
+        // Refresh the table
+        getAllItems().then(function (items) {
+          populateTable(items);
+        });
+      });
+    } else {
+      // Create new item
+      createItem(item).then(function () {
+        // Refresh the table
+        getAllItems().then(function (items) {
+          populateTable(items);
+        });
+      });
+    }
+
+    // Clear the form
+    this.reset();
+  });
+
+// Function to populate the form for editing
+function editItem(id, name, quantity, price) {
+  const form = document.getElementById("itemForm");
+  form.dataset.id = id;
+  document.getElementById("itemName").value = name;
+  document.getElementById("itemQuantity").value = quantity;
+  document.getElementById("itemPrice").value = price;
+  document.getElementById("submitBtn").textContent = "Update Item";
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+
+//call back for learn async await
+
+const userLogin = (username, password, callback) => {
+  setTimeout(() => {
+    callback({
+      username: username,
+      password: password,
+      email: "amin@gmail.com",
+    });
+  }, 4000);
+};
+
+const userCourses = (username, callback) => {
+  setTimeout(() => {
+    callback([
+      { id: 21, title: "Js Expert", price: "Free" },
+      { id: 34, title: "Redux Expert", price: "Free" },
+    ]);
+  }, 3000);
+};
+
+const mainCourseInfo = (courseTitle, callback) => {
+  setTimeout(() => {
+    callback({
+      id: 34,
+      title: "Redux Expert",
+      price: "Free",
+      teacher: "Saeedi rad",
+      student: 2291,
+    });
+  }, 2000);
+};
+
+console.log("سایت برای کاربر لود شد");
+
+const loginInfos = userLogin("amin_seaadi", "0101", (userObject) => {
+  console.log("کاربر لاگین شد:", userObject);
+
+  userCourses(userObject.username, (userAllCourses) => {
+    console.log("User Courses: ", userAllCourses);
+
+    mainCourseInfo(userAllCourses[1].title, (mainInfos) => {
+      console.log("Main Course Infos:", mainInfos);
+    });
+  });
+});
+
+console.log("کاربر با موفقیت لاگین شد");
+
+// async await with promise
+
+const userLogin = (username, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        username: username,
+        password: password,
+        email: "amin@gmail.com",
+      });
+    }, 4000);
+  });
+};
+
+const userCourses = (username) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        { id: 21, title: "Js Expert", price: "Free" },
+        { id: 34, title: "Redux Expert", price: "Free" },
+      ]);
+    }, 3000);
+  });
+};
+
+const mainCourseInfo = (courseTitle) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        id: 34,
+        title: "Redux Expert",
+        price: "Free",
+        teacher: "Saeedi rad",
+        student: 2291,
+      });
+    }, 2000);
+  });
+};
+
+console.log("سایت برای کاربر لود شد");
+
+// const loginInfos = userLogin('amin_seaadi', '0101', (userObject) => {
+//     console.log('کاربر لاگین شد:', userObject);
+
+//     userCourses(userObject.username, (userAllCourses) => {
+//         console.log('User Courses: ', userAllCourses);
+
+//         mainCourseInfo(userAllCourses[1].title, (mainInfos) => {
+//             console.log('Main Course Infos:', mainInfos);
+//         })
+//     })
+// })
+
+userLogin()
+  .then((userObject) => userCourses(userObject.username))
+  .then((userAllCourses) => mainCourseInfo(userAllCourses[1].title))
+  .then((mainInfos) => console.log(mainInfos));
+
+console.log("کاربر با موفقیت لاگین شد");
+
+// async await with async await
+
+const userLogin = (username, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        username: username,
+        password: password,
+        email: "amin@gmail.com",
+      });
+    }, 4000);
+  });
+};
+
+const userCourses = (username) => {
+  console.log("User username:", username);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        { id: 21, title: "Js Expert", price: "Free" },
+        { id: 34, title: "Redux Expert", price: "Free" },
+      ]);
+    }, 3000);
+  });
+};
+
+const mainCourseInfo = (courseTitle) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        id: 34,
+        title: "Redux Expert",
+        price: "Free",
+        teacher: "Saeedi rad",
+        student: 2291,
+      });
+    }, 2000);
+  });
+};
+
+console.log("سایت برای کاربر لود شد");
+
+// const loginInfos = userLogin('amin_seaadi', '0101', (userObject) => {
+//     console.log('کاربر لاگین شد:', userObject);
+
+//     userCourses(userObject.username, (userAllCourses) => {
+//         console.log('User Courses: ', userAllCourses);
+
+//         mainCourseInfo(userAllCourses[1].title, (mainInfos) => {
+//             console.log('Main Course Infos:', mainInfos);
+//         })
+//     })
+// })
+
+// userLogin()
+//     .then(userObject => userCourses(userObject.username))
+//     .then(userAllCourses => mainCourseInfo(userAllCourses[1].title))
+//     .then(mainInfos => console.log(mainInfos))
+
+async function runUserCodes() {
+  let userInfos = await userLogin("amin_saeedi", 0101);
+  let userAllCOurses = await userCourses(userInfos.username);
+  let mainInfos = await mainCourseInfo(userAllCOurses[1].title);
+
+  console.log(mainInfos);
+}
+
+runUserCodes();
+
+console.log("کاربر با موفقیت لاگین شد");
+
+// error handeling with async await
+
+const userLogin = (username, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        username: username,
+        password: password,
+        email: "amin@gmail.com",
+      });
+    }, 4000);
+  });
+};
+
+const userCourses = (username) => {
+  console.log("User username:", username);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // resolve([
+      //     { id: 21, title: 'Js Expert', price: 'Free' },
+      //     { id: 34, title: 'Redux Expert', price: 'Free' },
+      // ])
+
+      reject("Error :/");
+    }, 3000);
+  });
+};
+
+const mainCourseInfo = (courseTitle) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        id: 34,
+        title: "Redux Expert",
+        price: "Free",
+        teacher: "Saeedi rad",
+        student: 2291,
+      });
+    }, 2000);
+  });
+};
+
+console.log("سایت برای کاربر لود شد");
+
+// const loginInfos = userLogin('amin_seaadi', '0101', (userObject) => {
+//     console.log('کاربر لاگین شد:', userObject);
+
+//     userCourses(userObject.username, (userAllCourses) => {
+//         console.log('User Courses: ', userAllCourses);
+
+//         mainCourseInfo(userAllCourses[1].title, (mainInfos) => {
+//             console.log('Main Course Infos:', mainInfos);
+//         })
+//     })
+// })
+
+// userLogin()
+//     .then(userObject => userCourses(userObject.username))
+//     .then(userAllCourses => mainCourseInfo(userAllCourses[1].title))
+//     .then(mainInfos => console.log(mainInfos))
+
+async function runUserCodes() {
+  try {
+    let userInfos = await userLogin("amin_saeedi", 0101);
+    let userAllCOurses = await userCourses(userInfos.username);
+    let mainInfos = await mainCourseInfo(userAllCOurses[1].title);
+
+    console.log(mainInfos);
+  } catch (err) {
+    console.log("مشکلی وجود دارد:", err);
+    alert("لطفا دوباره سعی کنید");
+  }
+}
+
+runUserCodes();
+
+console.log("کاربر با موفقیت لاگین شد");
+
+// async await with the fake api
+
+// fetch('https://jsonplaceholder.typicode.com/posts')
+//     .then(res => res.json())
+//     .then(data => {
+//         data.forEach((post, index) => {
+//             console.log(`Post-${index + 1}: ${post}`);
+//         })
+//     })
+
+// Async Await Way
+
+async function getPosts() {
+  try {
+    let res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    let posts = await res.json();
+
+    posts.forEach((post, index) => {
+      console.log(`Post-${index + 1}: ${post}`);
+    });
+  } catch (err) {
+    console.log("یه خطایی وجود داره انگار:", err);
+    alert("لطفا یبار دیگه کد رو چک بکن");
+  }
+}
+
+getPosts();
+
+///////////////////////////////////////////////////////// crud operation with async await
+
+// Fetch all items and populate the table on page load
+window.onload = async function () {
+  const items = await getAllItems();
+  populateTable(items);
+};
+
+// Function to fetch all items
+async function getAllItems() {
+  try {
+    const response = await fetch("http://localhost:5000/items");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    return [];
+  }
+}
+
+// Function to create a new item
+async function createItem(item) {
+  try {
+    const response = await fetch("http://localhost:5000/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating item:", error);
+    return null;
+  }
+}
+
+// Function to update an item by ID
+async function updateItem(id, updatedItem) {
+  try {
+    const response = await fetch(`http://localhost:5000/items/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedItem),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error updating item:", error);
+    return null;
+  }
+}
+
+// Function to delete an item by ID
+async function deleteItem(id) {
+  try {
+    const response = await fetch(`http://localhost:5000/items/${id}`, {
+      method: "DELETE",
+    });
+    const data = await response.json();
+    // Refresh the table after deleting the item
+    const items = await getAllItems();
+    populateTable(items);
+    return data;
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    return null;
+  }
+}
+
+// Function to populate the table with items
+function populateTable(items) {
+  const table = document.getElementById("mytable");
+  table.innerHTML = ""; // Clear the table first
+
+  items.forEach((item, index) => {
+    const row = table.insertRow();
+
+    const idCell = row.insertCell(0);
+    idCell.textContent = index + 1;
+
+    const nameCell = row.insertCell(1);
+    nameCell.textContent = item.name;
+
+    const quantityCell = row.insertCell(2);
+    quantityCell.textContent = item.quantity;
+
+    const priceCell = row.insertCell(3);
+    priceCell.textContent = item.price;
+
+    const actionCell = row.insertCell(4);
+    actionCell.innerHTML = `
+      <button class="btn btn-warning" onclick="editItem('${item._id}', '${item.name}', ${item.quantity}, ${item.price})">Edit</button>
+      <button class="btn btn-danger" onclick="deleteItem('${item._id}')">Delete</button>
+    `;
+  });
+}
+
+// Function to handle form submission
+document
+  .getElementById("itemForm")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("itemName").value;
+    const quantity = document.getElementById("itemQuantity").value;
+    const price = document.getElementById("itemPrice").value;
+
+    const item = {
+      name,
+      quantity,
+      price,
+    };
+
+    if (this.dataset.id) {
+      // Update existing item
+      await updateItem(this.dataset.id, item);
+      delete this.dataset.id;
+      document.getElementById("submitBtn").textContent = "Add Item";
+    } else {
+      // Create new item
+      await createItem(item);
+    }
+
+    // Refresh the table
+    const items = await getAllItems();
+    populateTable(items);
+
+    // Clear the form
+    this.reset();
+  });
+
+// Function to populate the form for editing
+function editItem(id, name, quantity, price) {
+  const form = document.getElementById("itemForm");
+  form.dataset.id = id;
+  document.getElementById("itemName").value = name;
+  document.getElementById("itemQuantity").value = quantity;
+  document.getElementById("itemPrice").value = price;
+  document.getElementById("submitBtn").textContent = "Update Item";
+}
