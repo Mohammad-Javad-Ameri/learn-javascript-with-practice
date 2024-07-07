@@ -3435,6 +3435,242 @@ function editItem(id, name, quantity, price) {
   document.getElementById("submitBtn").textContent = "Update Item";
 }
 
+/////////////////////////////////////////////////////////////////class
+function User(username, userAge, userJob) {
+  this.name = username;
+  this.age = userAge;
+  this.job = userJob;
+
+  this.getName = function () {
+    return this.name;
+  };
+
+  this.getAge = function () {
+    return this.age;
+  };
+
+  this.getJob = function () {
+    return this.job;
+  };
+
+  this.setName = function (newName) {
+    this.name = newName;
+  };
+
+  this.setAge = function (newAge) {
+    this.age = newAge;
+  };
+
+  this.setJob = function (newJob) {
+    this.job = newJob;
+  };
+}
+
+let userAli = new User("Ali", 19, "Android Developer");
+let userAmir = new User("Amir", 22, "Web Developer");
+
+userAli.setAge(24);
+
+// console.log(userAmir.getJob());
+
+// Es6 - Class (setter getter extends ... )
+
+class Person {
+  constructor(personname, personAge, personJob, personAddress) {
+    // console.log('نمونه از روی نقشه (کلاس) ساخته شد ---> ', personname, personAge, personJob, personAddress);
+
+    this.username = personname;
+    this.personAge = personAge;
+    this.personJob = personJob;
+    this.personAddress = personAddress;
+  }
+}
+
+let personAli = new Person("Ali", 19, "Android Developer", "Tehran"); // Call
+let personAmir = new Person("Amir", 22, "Web Developer", "Tabriz"); // Call
+let personMohammad = new Person("Mohammad", 21, "Seo", "Shiraz"); // Call
+
+// console.log(personAli);
+// console.log(personAmir);
+// console.log(personMohammad);
+
+console.log(personAli.personJob);
+
+// MEthod in class
+
+// Es6 - Class (setter getter extends ... )
+
+class Person {
+  constructor(personname, personAge, personJob, personAddress) {
+    this.username = personname;
+    this.personAge = personAge;
+    this.personJob = personJob;
+    this.personAddress = personAddress;
+  }
+
+  startDev = () => {
+    console.log(`برنامه نویس ${this.username} کارشو استارت زد`);
+  };
+}
+
+let personAli = new Person("Ali", 19, "Android Developer", "Tehran"); // Call
+let personAmir = new Person("Amir", 22, "Web Developer", "Tabriz"); // Call
+let personMohammad = new Person("Mohammad", 21, "Seo", "Shiraz"); // Call
+
+personAmir.startDev(); // Call
+
+// console.log(Person.username);
+
+// console.log(personAli);
+// console.log(personAmir);
+// console.log(personMohammad);
+
+////////////////////////////////////////////// inheritence
+
+// Es6 - Class (setter getter extends ... )
+
+class Person {
+  constructor(personname, personAge, personJob, personAddress) {
+    // console.log('نمونه از روی نقشه (کلاس) ساخته شد ---> ', personname, personAge, personJob, personAddress);
+
+    this.personname = personname;
+    this.personAge = personAge;
+    this.personJob = personJob;
+    this.personAddress = personAddress;
+  }
+
+  // startDev () {
+  //     console.log(`برنامه نویس ${this.username} کارشو استارت زد`);
+  // }
+
+  startDev() {
+    console.log(`برنامه نویس ${this.username} کارشو استارت زد`);
+  }
+
+  getAge() {
+    return this.personAge;
+  }
+}
+
+class Prefessor extends Person {
+  constructor(
+    personname,
+    personAge,
+    personJob,
+    personAddress,
+    personLesson,
+    yearsOfjob
+  ) {
+    super(personname, personAge, personJob, personAddress);
+
+    this.personLesson = personLesson;
+    this.yearsOfjob = yearsOfjob;
+  }
+
+  startDev() {
+    console.log(super.getAge());
+    console.log(`استاد ${this.personname} تدریسش رو شروع کرد`);
+  }
+}
+
+// Todo - Booklist (id, title, isDoing) Exercise
+
+// DRY => Don't Repeat Yourself
+
+let prefessorRamin = new Prefessor(
+  "Ramin",
+  32,
+  "Prefessor",
+  "Tabriz",
+  "C++",
+  8
+);
+
+console.log(prefessorRamin.startDev());
+
+let personAli = new Person("Ali", 19, "Android Developer", "Tehran"); // Call
+let personAmir = new Person("Amir", 22, "Web Developer", "Tabriz"); // Call
+let personMohammad = new Person("Mohammad", 21, "Seo", "Shiraz"); // Call
+
+// personAmir.startDev() // Call
+
+// console.log(Person.username);
+
+// console.log(personAli);
+// console.log(personAmir);
+// console.log(personMohammad);
+
+////////////////////////////////////////////////////Navigator
+
+const button = document.querySelector(".wrapper");
+
+// button.addEventListener('click', () => {
+//     let copyText = 'متن جدید کپی شده است'
+
+//     if (window.navigator.clipboard) {
+//         window.navigator.clipboard.writeText(copyText)
+//         alert('متن در کلیپ بورد شما کپی شد')
+//     } else {
+//         alert('لطفا از مرورگر کروم استفاده بکنید')
+//     }
+
+// })
+
+button.addEventListener("click", () => {
+  if (window.navigator.clipboard) {
+    window.navigator.clipboard
+      .readText()
+      .then((res) => console.log("Clipboard Text:", res));
+  }
+});
+
+// charge
+
+const button = document.querySelector(".wrapper");
+
+button.addEventListener("click", () => {
+  if (navigator.getBattery) {
+    window.navigator.getBattery().then((batteryInfo) => {
+      console.log(batteryInfo); // Object
+
+      batteryInfo.addEventListener("levelchange", () => {
+        console.log("شارژ کاربر تغییر پیدا کرد");
+      });
+
+      batteryInfo.addEventListener("chargingchange", () => {
+        console.log("دیوایس به شارژ وصل شد | از شارژ درش آورد");
+      });
+    });
+  }
+});
+
+// user browser
+
+window.addEventListener("load", () => {
+  let userAgent = navigator.userAgent;
+  let userBrowser = null;
+
+  if (userAgent.match(/edg/i)) {
+    userBrowser = "edge";
+  } else if (userAgent.match(/firefox/i)) {
+    userBrowser = "firefox";
+  } else if (userAgent.match(/opr/i)) {
+    userBrowser = "opera";
+  } else if (userAgent.match(/chrome/i)) {
+    userBrowser = "chrome";
+  } else if (userAgent.match(/safari/i)) {
+    userBrowser = "safari";
+  }
+
+  console.log("Your Browser:", userBrowser);
+
+  let userBrowserImageElem = document.querySelector(`.${userBrowser}`);
+
+  if (userBrowserImageElem) {
+    userBrowserImageElem.style.opacity = "1";
+  }
+});
+
 ////////// set Cookie
 
 const setCookieBtn = document.querySelector("button");
