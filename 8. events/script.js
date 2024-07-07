@@ -2930,6 +2930,78 @@ function editItem(id, name, quantity, price) {
   document.getElementById("submitBtn").textContent = "Update Item";
 }
 
+/// html proje bala
+
+// <!DOCTYPE html>
+// <html lang="en">
+//   <head>
+//     <meta charset="utf-8" />
+//     <meta name="viewport" content="width=device-width, initial-scale=1" />
+//     <title>Items Table</title>
+//     <link href="style.css" rel="stylesheet" />
+//     <link
+//       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+//       rel="stylesheet"
+//       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+//       crossorigin="anonymous"
+//     />
+//   </head>
+//   <body>
+//     <div class="container mt-5">
+//       <h2 class="mb-4 text-center">Items</h2>
+
+//       <!-- Form for creating/updating items -->
+//       <form id="itemForm" class="border p-4 mb-4 bg-light rounded">
+//         <div class="mb-3">
+//           <label for="itemName" class="form-label">Name</label>
+//           <input type="text" class="form-control" id="itemName" required />
+//         </div>
+//         <div class="mb-3">
+//           <label for="itemQuantity" class="form-label">Quantity</label>
+//           <input
+//             type="number"
+//             class="form-control"
+//             id="itemQuantity"
+//             required
+//           />
+//         </div>
+//         <div class="mb-3">
+//           <label for="itemPrice" class="form-label">Price</label>
+//           <input type="number" class="form-control" id="itemPrice" required />
+//         </div>
+//         <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+//           Add Item
+//         </button>
+//       </form>
+
+//       <div class="table-responsive">
+//         <table class="table table-striped table-hover">
+//           <thead class="thead-dark">
+//             <tr>
+//               <th scope="col">#</th>
+//               <th scope="col">Name</th>
+//               <th scope="col">Quantity</th>
+//               <th scope="col">Price</th>
+//               <th scope="col">Action</th>
+//             </tr>
+//           </thead>
+//           <tbody id="mytable">
+//             <!-- Table rows will be dynamically populated -->
+//           </tbody>
+//         </table>
+//       </div>
+//     </div>
+
+//     <script src="script.js"></script>
+//     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+//     <script
+//       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+//       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+//       crossorigin="anonymous"
+//     ></script>
+//   </body>
+// </html>
+
 /////////////////////////////////////////////////////////////////////////////////
 
 //call back for learn async await
@@ -3363,249 +3435,178 @@ function editItem(id, name, quantity, price) {
   document.getElementById("submitBtn").textContent = "Update Item";
 }
 
-/////////////////////////////////////////////////////////////////class
-function User (username, userAge, userJob) {
-    this.name = username
-    this.age = userAge
-    this.job = userJob
+////////// set Cookie
 
-    this.getName = function () {
-        return this.name
+const setCookieBtn = document.querySelector("button");
+
+setCookieBtn.addEventListener("click", () => {
+  console.log(document.cookie); // show all cookies
+
+  const now = new Date();
+
+  console.log(now);
+
+  let expireDay = now.setTime(now.getTime() + 2 * 24 * 60 * 60 * 1000);
+
+  console.log(now);
+
+  document.cookie = `username=amin-saeedi;path=/;expires=${now}`;
+});
+
+/// get cookie
+
+const setCookieBtn = document.querySelector("button");
+const getCookieBtn = document.querySelector("#get-cookie");
+
+setCookieBtn.addEventListener("click", () => {
+  console.log(document.cookie); // show all cookies
+
+  const now = new Date();
+
+  console.log(now);
+
+  let expireDay = now.setTime(now.getTime() + 2 * 24 * 60 * 60 * 1000);
+
+  console.log(now);
+
+  document.cookie = `userage=22;path=/;expires=${now}`;
+});
+
+getCookieBtn.addEventListener("click", () => {
+  let mainCookieName = prompt("Enter the cookie main:");
+
+  let cookiesArray = document.cookie.split(";");
+
+  let mainCookie = null;
+
+  cookiesArray.some((cookie) => {
+    if (cookie.includes(mainCookieName)) {
+      mainCookie = cookie.substring(cookie.indexOf("=") + 1);
+      return true;
     }
+  });
 
-    this.getAge = function () {
-        return this.age
-    }
+  console.log(mainCookie);
+});
 
-    this.getJob = function () {
-        return this.job
-    }
+/// delete cookie
 
-    this.setName = function (newName) {
-        this.name = newName
-    }
+const setCookieBtn = document.querySelector("button");
+const getCookieBtn = document.querySelector("#get-cookie");
+const removeCookieBtn = document.querySelector("#remove-cookie");
 
-    this.setAge = function (newAge) {
-        this.age = newAge
-    }
+removeCookieBtn.addEventListener("click", () => {
+  let mainCookieName = prompt("Enter the main cookie name:");
 
-    this.setJob = function (newJob) {
-        this.job = newJob
-    }
+  const now = new Date();
 
+  console.log(now);
+
+  now.setTime(now.getTime() - 2 * 24 * 60 * 60 * 1000);
+
+  console.log(now);
+
+  document.cookie = `${mainCookieName}=22;path=/;expires=${now}`;
+});
+
+// login cookie project
+
+const $ = document;
+const usernameInput = $.querySelector("#username");
+const passwordInput = $.querySelector("#password");
+const rememberMeCheckbox = $.querySelector(".ck");
+const loginBtn = $.querySelector("button");
+
+function setCookie(cookieName, cookieValue, exDay) {
+  const now = new Date();
+
+  now.setTime(now.getTime() + exDay * 24 * 60 * 60 * 1000);
+
+  document.cookie = `${cookieName}=${cookieValue};path=/;expires=${now}`;
 }
 
-let userAli = new User('Ali', 19, 'Android Developer')
-let userAmir = new User('Amir', 22, 'Web Developer')
+function getCookie(cookieName) {
+  let cookiesArray = document.cookie.split(";");
 
-userAli.setAge(24)
+  let mainCookie = null;
 
-// console.log(userAmir.getJob());
-
-
-// Es6 - Class (setter getter extends ... )
-
-class Person {
-
-    constructor (personname, personAge, personJob, personAddress) {
-        // console.log('نمونه از روی نقشه (کلاس) ساخته شد ---> ', personname, personAge, personJob, personAddress);
-
-        this.username = personname
-        this.personAge = personAge
-        this.personJob = personJob
-        this.personAddress = personAddress
+  cookiesArray.some((cookie) => {
+    if (cookie.includes(cookieName)) {
+      mainCookie = cookie.substring(cookie.indexOf("=") + 1);
+      return true;
     }
+  });
 
+  return mainCookie;
 }
 
-let personAli = new Person('Ali', 19, 'Android Developer', 'Tehran') // Call
-let personAmir = new Person('Amir', 22, 'Web Developer', 'Tabriz') // Call
-let personMohammad = new Person('Mohammad', 21, 'Seo', 'Shiraz') // Call
-
-// console.log(personAli);
-// console.log(personAmir);
-// console.log(personMohammad);
-
-console.log(personAli.personJob);
-
-// MEthod in class
-
-// Es6 - Class (setter getter extends ... )
-
-class Person {
-
-    constructor (personname, personAge, personJob, personAddress) {
-    
-
-        this.username = personname
-        this.personAge = personAge
-        this.personJob = personJob
-        this.personAddress = personAddress
-    }
-
-
-    startDev = () => {
-        console.log(`برنامه نویس ${this.username} کارشو استارت زد`);
-    } 
-
+function clearInput() {
+  usernameInput.value = "";
+  passwordInput.value = "";
 }
 
-let personAli = new Person('Ali', 19, 'Android Developer', 'Tehran') // Call
-let personAmir = new Person('Amir', 22, 'Web Developer', 'Tabriz') // Call
-let personMohammad = new Person('Mohammad', 21, 'Seo', 'Shiraz') // Call
+loginBtn.addEventListener("click", (event) => {
+  event.preventDefault();
 
-personAmir.startDev() // Call
+  if (rememberMeCheckbox.checked) {
+    setCookie("login-token", usernameInput.value, 10);
+  }
 
-// console.log(Person.username);
+  clearInput();
+});
 
-// console.log(personAli);
-// console.log(personAmir);
-// console.log(personMohammad);
+// is login cookie project index file
 
-////////////////////////////////////////////// inheritence
+function getCookie(cookieName) {
+  let cookiesArray = document.cookie.split(";");
 
-// Es6 - Class (setter getter extends ... )
+  let mainCookie = null;
 
-class Person {
-
-    constructor (personname, personAge, personJob, personAddress) {
-        // console.log('نمونه از روی نقشه (کلاس) ساخته شد ---> ', personname, personAge, personJob, personAddress);
-
-        this.personname = personname
-        this.personAge = personAge
-        this.personJob = personJob
-        this.personAddress = personAddress
+  cookiesArray.some((cookie) => {
+    if (cookie.includes(cookieName)) {
+      mainCookie = cookie.substring(cookie.indexOf("=") + 1);
+      return true;
     }
+  });
 
-    // startDev () {
-    //     console.log(`برنامه نویس ${this.username} کارشو استارت زد`);
-    // } 
-
-    startDev () {
-        console.log(`برنامه نویس ${this.username} کارشو استارت زد`);
-    } 
-
-    getAge () {
-        return this.personAge
-    }
-
+  return mainCookie;
 }
 
-class Prefessor extends Person {
+window.addEventListener("load", () => {
+  let isLogin = getCookie("login-token");
 
-    constructor (personname, personAge, personJob, personAddress, personLesson, yearsOfjob) {
+  if (!isLogin) {
+    location.href = "http://localhost/login.html";
+  }
+});
 
-        super(personname, personAge, personJob, personAddress)
-        
-        this.personLesson = personLesson
-        this.yearsOfjob = yearsOfjob
-    }
+// //// is login cookie login file
 
-    startDev () {
-        console.log(super.getAge());
-        console.log(`استاد ${this.personname} تدریسش رو شروع کرد`);
-    }
+const $ = document;
+const usernameInput = $.querySelector("#username");
+const passwordInput = $.querySelector("#password");
+const rememberMeCheckbox = $.querySelector(".ck");
+const loginBtn = $.querySelector("button");
 
+function setCookie(cookieName, cookieValue, exDay) {
+  const now = new Date();
+
+  now.setTime(now.getTime() + exDay * 24 * 60 * 60 * 1000);
+
+  document.cookie = `${cookieName}=${cookieValue};path=/;expires=${now}`;
 }
 
-// Todo - Booklist (id, title, isDoing) Exercise
+function clearInput() {
+  usernameInput.value = "";
+  passwordInput.value = "";
+}
 
-// DRY => Don't Repeat Yourself
+loginBtn.addEventListener("click", (event) => {
+  event.preventDefault();
 
-let prefessorRamin = new Prefessor('Ramin', 32, 'Prefessor', 'Tabriz', 'C++', 8)
+  if (rememberMeCheckbox.checked) {
+    setCookie("login-token", usernameInput.value, 10);
+  }
 
-console.log(prefessorRamin.startDev());
-
-
-let personAli = new Person('Ali', 19, 'Android Developer', 'Tehran') // Call
-let personAmir = new Person('Amir', 22, 'Web Developer', 'Tabriz') // Call
-let personMohammad = new Person('Mohammad', 21, 'Seo', 'Shiraz') // Call
-
-// personAmir.startDev() // Call
-
-// console.log(Person.username);
-
-// console.log(personAli);
-// console.log(personAmir);
-// console.log(personMohammad);
-
-
-
-////////////////////////////////////////////////////Navigator
-
-const button = document.querySelector('.wrapper')
-
-// button.addEventListener('click', () => {
-//     let copyText = 'متن جدید کپی شده است'
-
-    
-//     if (window.navigator.clipboard) {
-//         window.navigator.clipboard.writeText(copyText)
-//         alert('متن در کلیپ بورد شما کپی شد')
-//     } else {
-//         alert('لطفا از مرورگر کروم استفاده بکنید')
-//     }
-
-// })
-
-button.addEventListener('click', () => {
-    if (window.navigator.clipboard) {
-        window.navigator.clipboard.readText()
-            .then(res => console.log('Clipboard Text:', res))
-    }
-})
-
-// charge
-
-const button = document.querySelector('.wrapper')
-
-button.addEventListener('click', () => {
-
-    if (navigator.getBattery) {
-        window.navigator.getBattery()
-            .then(batteryInfo => {
-                console.log(batteryInfo); // Object
-
-
-                batteryInfo.addEventListener('levelchange', () => {
-                    console.log('شارژ کاربر تغییر پیدا کرد');
-                })
-               
-                batteryInfo.addEventListener('chargingchange', () => {
-                    console.log('دیوایس به شارژ وصل شد | از شارژ درش آورد');
-                })
-            })
-    }
-
-})
-
-// user browser
-
-
-window.addEventListener('load', () => {
-    let userAgent = navigator.userAgent
-    let userBrowser = null
-
-    if (userAgent.match(/edg/i)) {
-        userBrowser = 'edge'
-    } else if (userAgent.match(/firefox/i)) {
-        userBrowser = 'firefox'
-    } else if (userAgent.match(/opr/i)) {
-        userBrowser = 'opera'
-    } else if (userAgent.match(/chrome/i)) {
-        userBrowser = 'chrome'
-    } else if (userAgent.match(/safari/i)) {
-        userBrowser = 'safari'
-    }
-
-    console.log('Your Browser:', userBrowser);
-
-    let userBrowserImageElem = document.querySelector(`.${userBrowser}`)
-
-    if (userBrowserImageElem) {
-        userBrowserImageElem.style.opacity = '1'
-    }
-
-
-
-})
+  clearInput();
+});
