@@ -3816,7 +3816,7 @@ window.addEventListener("load", () => {
   }
 });
 
-// //// is login cookie login file
+////// is login cookie login file
 
 const $ = document;
 const usernameInput = $.querySelector("#username");
