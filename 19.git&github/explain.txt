@@ -1,5 +1,46 @@
 what is git?
+
 why use git?
+
 why git is important?
+
 how to use git?
+
 git vs github vs gitlab
+
+branching see a photo in google
+
+git main steps = working directory, staging area, repository
+
+install git
+
+git init
+
+.git = hidden folder in our project folder for storing git files and project change history
+
+git status = check the status of our project
+
+make some forlder and file in our project 
+
+git add  = add a file to the staging area
+
+git add . = add all files to the staging area
+
+U = untracked files , A = added files, M = modified files , D = deleted files
+
+git rm --cached <file name> = remove a file from the staging area
+
+for send changes to the repository = git commit -m "message"
+
+git log = check the commit history
+
+git log --oneline = check the commit history in one line
+
+git log --stat = check the commit history with the changes
+
+git show <commit id> = show the changes of a specific commit before useit make sure make the git log to get the ids
+
+git config --local alias.lgo = "log --oneline" = for make a short command
+
+git branches = master , develop , feature
+

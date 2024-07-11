@@ -1,0 +1,101 @@
+What is npm ?
+
+how to instll?
+
+npm vs yarn vs pnpm
+
+what is module?
+
+terminal commands : cd ls pwd mkdir rmdir rm mv cp mv clear
+
+arrow for the last command 
+
+khareg shodan az folder cd ../
+
+npm init npm init -y
+
+what is package.json
+
+package.json = package name, version, description, author, repository, keywords, license, bugs, homepage, dependencies, devDependencies
+
+install packages
+
+npm install <package name>
+
+npm i <package name>
+
+dependencies
+
+version
+
+npm uninstall <package name>
+
+npm un <package name>
+
+node_modules and why we need it 
+
+semantic versioning
+
+major minor patch
+
+major version change when there is a breaking change and the old code will not work with the new code
+
+minor version change when there is a new feature and the old code will work with the new code
+
+patch (bug fix) version change when there is a bug fix and the old code will work with the new code
+
+install older version of a package = npm install <package name>@<version>
+
+dependencies vs devDependencies
+
+install devDependencies = npm install <package name> --save-dev 
+
+we can use short = npm install <package name> -D 
+
+--save = qablan azash estefade mishod bad az version 5 hazf shod faqat baray devDependencies azash estefade mishe
+
+local vs global 
+
+local = npm install <package name>
+
+global = npm install -g <package name>
+
+install 2 or more packages at once = npm install <package name1> <package name2>
+
+package.json vs package-lock.json
+
+package.json = package name, version, description, author, repository, keywords, license, bugs, homepage, dependencies, devDependencies
+
+package-lock.json = dependencies, devDependencies, scripts, and other metadata
+
+npm list 
+
+npm list --depth 0
+
+config npm
+
+npm config set init-author-name "<NAME>"
+
+npm config set init-license "MIT"
+
+we can use npm set and delete the config
+
+npm get init-author-name
+
+npm documentation in npmjs.com
+
+scripts in npm
+
+"app": "node app.js"
+
+npm run <script name>
+
+^ vs ~ vs *
+
+caret = ^ = patch and minor version change
+
+tilde = ~ = patch version change
+
+asterisk = * = major and minor and patch version change
+
+npx = run the package without installing it
