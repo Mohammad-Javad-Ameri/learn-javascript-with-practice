@@ -1,4 +1,4 @@
-what is git?
+what is git? = git is a version control system that lets you track changes to your files over time.
 
 why use git?
 
@@ -30,7 +30,9 @@ U = untracked files , A = added files, M = modified files , D = deleted files
 
 git rm --cached <file name> = remove a file from the staging area
 
-for send changes to the repository = git commit -m "message"
+git commit -m "message" = for send changes to the repository 
+
+git commit -am "message" = for send changes to the repository and add a message
 
 git log = check the commit history
 
@@ -44,3 +46,76 @@ git config --local alias.lgo = "log --oneline" = for make a short command
 
 git branches = master , develop , feature
 
+git brnches why we use it ? 
+
+git branch = to see the current branches
+
+git branch <branch name> = create a new branch
+
+git switch -c <branch name> = create a new branch and switch to it
+
+git switch <branch name> = switch to a branch
+
+git branch -c <branch name> = create a new branch
+
+git branch -d <branch name> = delete a branch
+
+git branch -m <branch name> = rename a branch
+
+fast forward vs non fast forward
+
+git merge <branch name> = merge a branch into the current branch
+
+for merge a branch into the master we need to make sure that they are in in the master branch
+
+fast forward = git merge <branch name> = merge a branch into the current branch when the master branch is dont update 
+
+non fast forward = git merge <branch name> = merge a branch into the current branch when the master branch is updated
+
+non fast forward with conflict is when the file is modified in the master branch and in the current branch
+
+semantic commit message in the google
+
+git diff <file name> = check the changes in a file in the staging area and with working directory
+
+git diff <id>...<id> = check the changes between two commit ids
+
+git diff <branch name>...<branch name> = check the changes between two branches
+
+.gitignore = ignore some files for git like node_modules or .env 
+
+git checkout <branch name> = switch to a branch 
+
+git checkout -b <branch name> = create a new branch and switch to it
+
+git checkout <commit id> = switch to a specific commit id
+
+git checkout Head . = switch to the last commit and discard the new changes
+
+git restore <file name> = discard a file from the working directory  
+
+git restore --staged <file name> = restore a file from the staging area
+
+git restore --source <commit id> <file name> = restore a file from a specific commit id
+
+git restore --source <branch name> <file name> = restore a file from a specific branch
+
+git restore --source <file name> = restore a file from all the branches
+
+git restore --source <commit id> = restore a file from all the branches
+
+git clean -h = show the help
+
+git clean -f = remove all the files from the staging area
+
+git clean -f -d = remove all the files from the staging area
+
+git reset = remove all the files 
+
+git reset --soft = remove all the files in the repository and staging area but not in the working directory
+
+git reset --mixed = remove all the files in the repository and staging area but not in the working directory but make the files out of the staging area
+
+git reset --hard = remove all the files in the repository and staging area and working directory
+
+git reset --hard <commit id> = remove all the files in the repository and staging area and working directory and switch to a specific commit id
