@@ -119,3 +119,17 @@ git reset --mixed = remove all the files in the repository and staging area but 
 git reset --hard = remove all the files in the repository and staging area and working directory
 
 git reset --hard <commit id> = remove all the files in the repository and staging area and working directory and switch to a specific commit id
+
+git revert <commit id> = undo the changes of a specific commit id
+
+conflict in revert 
+
+revert is for the recent files and for the older files we need to use the git reset command 
+
+git status -s = for shorter status with the changes
+
+github and explain in the google
+
+create github account
+
+git clone <url> = clone a repository from a url
