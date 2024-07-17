@@ -76,15 +76,23 @@ non fast forward with conflict is when the file is modified in the master branch
 
 semantic commit message in the google
 
+every branch should have a one thing in it
+
+git diff = compare the changes in the working directory and the staging area
+
+git diff --staged = compare the changes in the staging area
+
 git diff <file name> = check the changes in a file in the staging area and with working directory
 
-git diff <id>...<id> = check the changes between two commit ids
+git diff <id>..<id> = check the changes between two commit ids
 
-git diff <branch name>...<branch name> = check the changes between two branches
+git diff <branch name>..<branch name> = check the changes between two branches
 
 .gitignore = ignore some files for git like node_modules or .env 
 
 git checkout <branch name> = switch to a branch 
+
+git log --oneline --all = check the commit history in one line
 
 git checkout -b <branch name> = create a new branch and switch to it
 
@@ -132,4 +140,45 @@ github and explain in the google
 
 create github account
 
+explain the github repositories
+
+create a repository
+
 git clone <url> = clone a repository from a url
+
+git remote add origin <url> = add a remote repository
+
+git remore -v = show the version of the remote repository
+
+git remote remove <name> = remove a remote repository
+
+git remote rename <old name> <new name> = rename a remote repository
+
+git push origin <branch name> = push a branch to the remote repository
+
+if the user its not in the git repo it get the 403 error
+
+git push -u origin <branch name> = push a branch to the remote repository and add the remote as a remote branch
+
+git pull origin <branch name> = pull a branch from the remote repository
+
+git fetch origin <branch name> = fetch a branch from the remote repository
+
+git branch -r = show all the branches in the remote repository
+
+be hamon tedad ke branch darim git baray ma branch remote be hamoon name misaze
+
+git switch -c <branch name> origin/<branch name> = add the changes in the remote brnach and send to a new branch 
+
+git pull === git fetch + git merge
+
+conflict in pull and make a conflict in the repo on github
+
+mark down language
+
+github pages
+
+deploy site 
+
+add collaborator to repo
+
