@@ -180,5 +180,42 @@ github pages
 
 deploy site 
 
+private repositories
+
 add collaborator to repo
 
+pull request 
+
+make a new branch with git switch -c auth 
+
+then push the thing and get error the make a git push --set-upstream origin auth or git push -u origin auth
+
+pull request with conflict
+
+fork repo and explain why we use it
+
+make a fork in action
+
+pull request in fork 
+
+make pull form main repo in fork
+
+git commit --ammend =to add the latest change to the the last commit
+
+stash 
+
+git stash save "message" = save the current state of the working directory
+
+git stash list = show the stash list
+
+git stahs pop = pop the last stash
+
+git stash show -p -stash@{0} = show the last stash with the changes
+
+git stash clear = clear the stash  
+
+git blame <file name> = check the blame of a file
+
+git bisect in google 
+
+git tag = create a tag for versioning

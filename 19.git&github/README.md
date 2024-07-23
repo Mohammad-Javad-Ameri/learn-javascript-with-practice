@@ -1,8 +1,8 @@
-# Sabzlearn Git Course Repo
+# mj Git Course Repo
 
 ---
 
-<p>This Respo is for session 54 of sabzlearn git course :))</p>
+<p>This Respo is for mj git course :))</p>
 
 ---
 
@@ -12,9 +12,9 @@ Inline `code`
 
 ```json
 {
-  "firstName": "Amin",
-  "lastName": "Saaedi",
-  "userName": "Amin_Saeedi_0101"
+  "firstName": "mj",
+  "lastName": "ameri",
+  "userName": "mjameri"
 }
 ```
 
@@ -54,11 +54,11 @@ Unordered:
 
 ## Projects Links
 
-[Sabzlearn Git Course](http://sabzlearn.ir/product/git-github/)
+[mj Git Course](http://mj.ir/product/git-github/)
 
-[Sabzlearn Nodejs Ex Course](https://sabzlearn.ir/product/node-ex/)
+[mj Nodejs Ex Course](https://mj.ir/product/node-ex/)
 
-[Sabzlearn TypeScript Course](https://sabzlearn.ir/product/typescript/)
+[mj TypeScript Course](https://mj.ir/product/typescript/)
 
 ---
 
@@ -81,12 +81,12 @@ Unordered:
 
 ![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 
-<!-- ## Sabzlearn Git Course Repo
+<!-- ## mj Git Course Repo
 
-### Sabzlearn Git Course Repo
+### mj Git Course Repo
 
-#### Sabzlearn Git Course Repo
+#### mj Git Course Repo
 
-##### Sabzlearn Git Course Repo
+##### mj Git Course Repo
 
-###### Sabzlearn Git Course Repo -->
+###### mj Git Course Repo -->
