@@ -219,3 +219,7 @@ git blame <file name> = check the blame of a file
 git bisect in google 
 
 git tag = create a tag for versioning
+
+git rebase in google
+
+github desktop in practice
